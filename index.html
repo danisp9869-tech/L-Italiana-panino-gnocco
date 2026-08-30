@@ -284,7 +284,7 @@
   .offer-box ul { margin-left: 0; margin-right: 0; }
   .offer-box .price-row { justify-content: flex-start; }
   .offer-img { height: 480px !important; object-fit: cover !important; object-position: center; }
-  .offer-cta { display: flex !important; width: fit-content; margin-left: auto !important; margin-right: auto !important; justify-content: center; padding-top: 12px !important; padding-bottom: 12px !important; min-height: 0 !important; }
+  .offer-cta { display: flex !important; width: fit-content; margin-left: 0; margin-right: auto; justify-content: center; padding-top: 12px !important; padding-bottom: 12px !important; min-height: 0 !important; }
   .offer-box::before {
     content: "";
     position: absolute;
@@ -307,6 +307,7 @@
     /* Box offerta più compatto su mobile; foto a tutta larghezza sotto il testo */
     .offer-box { padding:32px 20px; border-radius:20px; }
     .offer-img { height:auto !important; min-height:0 !important; }
+    .offer-cta { margin-left:auto; margin-right:auto; }
   }
   @media (max-width: 430px) {
     .site-tagline { display:none !important; }
