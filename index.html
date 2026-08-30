@@ -263,6 +263,12 @@
   .btn-yellow:hover { background:#ffe14d; }
 </style>
 <style>
+  /* Come bombette: centrati solo hero, offerta e form; resto a sinistra */
+  .sec-centered { text-align: center; }
+  .sec-centered ul { margin-left: auto; margin-right: auto; }
+  .sec-centered input, .sec-centered select, .sec-centered textarea { text-align: left; }
+  .price-row { justify-content: center; }
+
   /* Ottimizzazioni mobile — vincono sugli stili inline con !important */
   @media (max-width: 640px) {
     .site-header { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
@@ -312,7 +318,7 @@
     </div>
   </section>
 
-  <section style="padding:96px 24px; border-top:1px solid #1f1f1f; background:#0d0d0d">
+  <section class="sec-centered" style="padding:96px 24px; border-top:1px solid #1f1f1f; background:#0d0d0d">
     <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:56px; align-items:center">
       <div>
         <div style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#8a8a8a; font-size:clamp(18px, 2vw, 24px); line-height:1">La nostra offerta speciale</div>
@@ -328,7 +334,7 @@
           <div>+ Contorno a scelta</div>
           <div>Gnocco fritto con lardo in omaggio</div>
         </div>
-        <div style="display:flex; align-items:baseline; gap:18px; margin-top:34px; flex-wrap:wrap">
+        <div class="price-row" style="display:flex; align-items:baseline; gap:18px; margin-top:34px; flex-wrap:wrap">
           <span style="font-size:clamp(15px, 1.7vw, 18px); color:#b5b5b5">A soli</span>
           <span style="font-family:'Barlow Condensed', sans-serif; font-weight:700; color:#ffd400; font-size:clamp(46px, 6.6vw, 84px); line-height:0.85">16,90€</span>
         </div>
@@ -358,7 +364,7 @@
     </div>
   </section>
 
-  <section id="prenota" style="padding:96px 24px; background:#111111; border-top:1px solid #1f1f1f">
+  <section id="prenota" class="sec-centered" style="padding:96px 24px; background:#111111; border-top:1px solid #1f1f1f">
     <div style="max-width:720px; margin:0 auto; display:grid; gap:40px; justify-items:center">
       <div style="text-align:center">
         <h2 style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(36px, 5vw, 64px); line-height:0.98; margin:14px 0 20px; color:#ffd400">Prenota l'offerta</h2>
@@ -433,7 +439,7 @@
 
   <section id="offerta" style="padding:96px 24px; border-top:1px solid #1f1f1f">
     <div style="max-width:1180px; margin:0 auto">
-      <div style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:44px">
+      <div class="sec-head" style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:44px">
         <h2 style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(34px, 4.6vw, 60px); line-height:1; margin:0">Cosa trovi nel piatto</h2>
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1px; background:#242424; border:1px solid #242424; border-radius:16px; overflow:hidden">
@@ -459,7 +465,7 @@
   <sc-if hint-placeholder-val="{{ true }}">
   <section style="padding:88px 24px; border-top:1px solid #1f1f1f">
     <div style="max-width:1180px; margin:0 auto">
-      <div style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:40px">
+      <div class="sec-head" style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:40px">
         <h2 style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(32px, 4.2vw, 54px); line-height:1; margin:0">Dicono di noi</h2>
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px">
@@ -497,7 +503,7 @@
 
   <section style="padding:88px 24px; border-top:1px solid #1f1f1f">
     <div style="max-width:1180px; margin:0 auto">
-      <div style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:34px">
+      <div class="sec-head" style="display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:34px">
         <h2 style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; font-size:clamp(32px, 4.2vw, 54px); line-height:1; margin:0">Come arrivarci e contatti</h2>
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:48px; align-items:start">
