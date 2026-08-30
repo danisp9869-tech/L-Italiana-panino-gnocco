@@ -269,6 +269,26 @@
   .sec-centered input, .sec-centered select, .sec-centered textarea { text-align: left; }
   .price-row { justify-content: center; }
 
+  /* Offerta: box dedicato ben visibile (stile bombette, accento giallo) */
+  .offer-box {
+    position: relative;
+    overflow: hidden;
+    max-width: 1120px !important;
+    background: linear-gradient(160deg, #1c1c1c, #0b0b0b 70%);
+    border: 2px solid rgba(255, 212, 0, 0.55);
+    border-radius: 24px;
+    padding: 48px 44px;
+    box-shadow: 0 0 0 1px rgba(255, 212, 0, 0.12), 0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+  .offer-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 212, 0, 0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .offer-box > div { position: relative; z-index: 1; }
+
   /* Ottimizzazioni mobile — vincono sugli stili inline con !important */
   @media (max-width: 640px) {
     .site-header { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
@@ -279,6 +299,8 @@
     .hero-title { font-size:64px !important; }
     /* Gnocco fritto: foto sotto il testo su mobile */
     .gnocco-grid > div:first-child { order:2; }
+    /* Box offerta più compatto su mobile */
+    .offer-box { padding:32px 20px; border-radius:20px; }
   }
   @media (max-width: 430px) {
     .site-tagline { display:none !important; }
@@ -319,7 +341,7 @@
   </section>
 
   <section class="sec-centered" style="padding:96px 24px; border-top:1px solid #1f1f1f; background:#0d0d0d">
-    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:56px; align-items:center">
+    <div class="offer-box" style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:56px; align-items:center">
       <div>
         <div style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#8a8a8a; font-size:clamp(18px, 2vw, 24px); line-height:1">La nostra offerta speciale</div>
         <h2 style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; line-height:0.86; letter-spacing:-0.01em; margin:8px 0 0; font-size:clamp(56px, 8.5vw, 116px)">Maxi<br><span style="color:#ffd400">hamburger</span></h2>
