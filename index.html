@@ -262,17 +262,32 @@
   a:hover, .btn-outline:hover { border-color:#ffd400; color:#ffd400; }
   .btn-yellow:hover { background:#ffe14d; }
 </style>
+<style>
+  /* Ottimizzazioni mobile — vincono sugli stili inline con !important */
+  @media (max-width: 640px) {
+    .site-header { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
+    .site-name { font-size:19px !important; letter-spacing:0.10em !important; }
+    .header-cta { font-size:13px !important; letter-spacing:0.10em !important; padding:10px 14px !important; white-space:nowrap !important; flex:0 0 auto; }
+    section { padding-top:56px !important; padding-bottom:56px !important; }
+  }
+  @media (max-width: 430px) {
+    .site-tagline { display:none !important; }
+  }
+  @media (max-width: 360px) {
+    .header-cta { font-size:12px !important; padding:9px 12px !important; }
+  }
+</style>
 
 </head>
 <body>
 <div style="background:#0a0a0a; color:#fff; font-family:'Barlow', sans-serif; overflow-x:hidden">
 
-  <header style="position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 28px; background:rgba(10,10,10,0.92); backdrop-filter:blur(6px); borderBottom:1px solid #262626; border-bottom:1px solid #262626">
+  <header class="site-header" style="position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 28px; background:rgba(10,10,10,0.92); backdrop-filter:blur(6px); borderBottom:1px solid #262626; border-bottom:1px solid #262626">
     <div style="display:flex; align-items:baseline; gap:10px">
-      <span style="font-family:'Barlow Condensed', sans-serif; font-size:26px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase">L'Italiana</span>
-      <span style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#8a8a8a">Ristorante · Pizzeria</span>
+      <span class="site-name" style="font-family:'Barlow Condensed', sans-serif; font-size:26px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase">L'Italiana</span>
+      <span class="site-tagline" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#8a8a8a">Ristorante · Pizzeria</span>
     </div>
-    <a href="#prenota" style="font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; background:#ffd400; color:#0a0a0a; padding:11px 20px; border-radius:10px; min-height:44px; display:inline-flex; align-items:center">Prenota un tavolo</a>
+    <a href="#prenota" class="header-cta" style="font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; background:#ffd400; color:#0a0a0a; padding:11px 20px; border-radius:10px; min-height:44px; display:inline-flex; align-items:center">Prenota un tavolo</a>
   </header>
 
   <section style="position:relative; min-height:calc(100vh - 68px); display:grid; place-items:center; padding:80px 24px 96px; overflow:hidden">
