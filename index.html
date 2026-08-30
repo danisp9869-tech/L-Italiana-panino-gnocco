@@ -347,6 +347,22 @@
   .book .err { margin-top:12px; font-size:13px; color:#e8121a; min-height:18px; }
   .book .conf-title { font-family:'Barlow Condensed', sans-serif; font-size:34px; font-weight:700; text-transform:uppercase; color:#0a0a0a; line-height:1; }
   .book .conf-text { margin:14px 0 0; color:#555; font-size:17px; line-height:1.6; }
+
+  /* Date picker personalizzato (lunedì di chiusura non selezionabile) */
+  .book .datepick { width:100%; text-align:left; padding:13px 14px; background:var(--field); border:1px solid var(--bordo); border-radius:10px; color:var(--ink); font-size:16px; font-family:inherit; min-height:48px; box-shadow:0 2px 5px rgba(0,0,0,0.08); cursor:pointer; }
+  .book .datepick.placeholder { color:#a99f96; }
+  .book .cal { position:absolute; z-index:30; left:0; right:0; margin-top:8px; background:#fff; border:1px solid var(--bordo); border-radius:12px; box-shadow:0 16px 40px rgba(0,0,0,0.28); padding:14px; }
+  .book .cal-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .book .cal-head button { border:none; background:var(--field); border-radius:8px; width:36px; height:36px; font-size:18px; line-height:1; cursor:pointer; color:var(--ink); }
+  .book .cal-head button:disabled { opacity:0.35; cursor:not-allowed; }
+  .book .cal-head span { font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; font-size:17px; color:var(--ink); }
+  .book .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+  .book .cal-grid .dow { text-align:center; font-size:11px; color:var(--ink-soft); font-weight:700; padding:4px 0; }
+  .book .cal-grid .empty { height:38px; }
+  .book .cal-grid button.day { border:none; background:transparent; border-radius:8px; height:38px; font-size:14px; cursor:pointer; color:var(--ink); font-family:inherit; }
+  .book .cal-grid button.day:hover:not(:disabled) { background:var(--field); }
+  .book .cal-grid button.day:disabled { color:#cfc7bf; cursor:not-allowed; text-decoration:line-through; }
+  .book .cal-grid button.day.sel { background:#ffd400; color:#0a0a0a; font-weight:700; }
 </style>
 
 </head>
@@ -431,9 +447,11 @@
         <span class="book-badge"><span class="dot"></span>Esclusiva di settembre</span>
       </div>
       <div class="book" id="modulo" aria-label="Prenota il tavolo">
-        <div class="field">
-          <label for="data">1 &middot; Data</label>
-          <input type="date" id="data" required>
+        <div class="field" style="position:relative">
+          <label>1 &middot; Data</label>
+          <button type="button" id="dataBtn" class="datepick placeholder">Scegli la data</button>
+          <input type="hidden" id="data">
+          <div id="cal" class="cal" hidden></div>
         </div>
         <div class="field">
           <label for="persone">2 &middot; Quante persone</label>
@@ -603,50 +621,80 @@
 <script>
 (function () {
     var $ = function (id) { return document.getElementById(id); };
-    var dateEl=$("data"), peopleEl=$("persone"), slotEl=$("orario"),
+    var dateEl=$("data"), btn=$("dataBtn"), cal=$("cal"),
+        peopleEl=$("persone"), slotEl=$("orario"),
         nomeEl=$("nome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
-    if (!dateEl || !peopleEl || !slotEl) return;
+    if (!dateEl || !peopleEl || !slotEl || !btn || !cal) return;
 
-    // Orari di apertura per giorno (0=Dom ... 6=Sab). null = chiuso.
-    // 'last' = ultimo slot prenotabile (30 min prima della chiusura).
     var ORARI = { 0:{last:"22:30"}, 1:null, 2:{last:"22:30"}, 3:{last:"22:30"}, 4:{last:"22:30"}, 5:{last:"22:30"}, 6:{last:"23:00"} };
-    var GIORNI = ["domenica","luned\u00ec","marted\u00ec","mercoled\u00ec","gioved\u00ec","venerd\u00ec","sabato"];
+    var GIORNI = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+    var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+    var DOW = ["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
 
     function iso(d){var m=d.getMonth()+1,g=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g;}
     function parse(v){var p=v.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
+    function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
     function slots(last){var out=[],h=19,m=0,lp=last.split(":"),lh=+lp[0],lm=+lp[1];while(h<lh||(h===lh&&m<=lm)){out.push((h<10?"0":"")+h+":"+(m<10?"0":"")+m);m+=30;if(m>=60){m=0;h++;}}return out;}
 
     var today=new Date(); today.setHours(0,0,0,0);
     var start=new Date(today); while(ORARI[start.getDay()]===null){ start.setDate(start.getDate()+1); }
-    dateEl.min=iso(today);
-    if(!dateEl.value) dateEl.value=iso(start);
+    var selected=null;
+    var view=new Date(start.getFullYear(), start.getMonth(), 1);
 
     for(var n=1;n<=20;n++){var o=document.createElement("option");o.value=n;o.textContent=n+(n===1?" persona":" persone");peopleEl.appendChild(o);}
     peopleEl.value="2";
 
     function riempiOrari(){
-      var v=dateEl.value; slotEl.innerHTML=""; errEl.textContent="";
-      if(!v){return;}
-      var wd=parse(v).getDay(), cfg=ORARI[wd];
-      if(cfg===null){
-        errEl.textContent="Il "+GIORNI[wd]+" siamo chiusi: scegli un altro giorno.";
-        var op=document.createElement("option");op.textContent="Chiuso";op.value="";slotEl.appendChild(op);
-        slotEl.disabled=true; return;
-      }
+      slotEl.innerHTML=""; errEl.textContent="";
+      if(!dateEl.value){ slotEl.disabled=true; return; }
+      var cfg=ORARI[parse(dateEl.value).getDay()];
+      if(cfg===null){ slotEl.disabled=true; return; }
       slotEl.disabled=false;
       slots(cfg.last).forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
     }
-    dateEl.addEventListener("change", riempiOrari);
-    dateEl.addEventListener("input", riempiOrari);
-    riempiOrari();
+
+    function pick(d){
+      selected=d; dateEl.value=iso(d);
+      btn.textContent=("0"+d.getDate()).slice(-2)+" "+MESI[d.getMonth()]+" "+d.getFullYear();
+      btn.classList.remove("placeholder");
+      cal.hidden=true; riempiOrari();
+    }
+
+    function render(){
+      var y=view.getFullYear(), m=view.getMonth();
+      var atMin = (y<today.getFullYear())||(y===today.getFullYear()&&m<=today.getMonth());
+      var html='<div class="cal-head"><button type="button" id="calPrev"'+(atMin?" disabled":"")+'>‹</button><span>'+MESI[m]+" "+y+'</span><button type="button" id="calNext">›</button></div><div class="cal-grid">';
+      for(var i=0;i<7;i++){ html+='<div class="dow">'+DOW[i]+'</div>'; }
+      var first=new Date(y,m,1); var off=(first.getDay()+6)%7;
+      for(var e=0;e<off;e++){ html+='<div class="empty"></div>'; }
+      var last=new Date(y,m+1,0).getDate();
+      for(var g=1; g<=last; g++){
+        var d=new Date(y,m,g);
+        var closed=ORARI[d.getDay()]===null;
+        var past=d<today;
+        var sel=selected&&sameDay(d,selected);
+        var dis=closed||past;
+        html+='<button type="button" class="day'+(sel?" sel":"")+'" data-d="'+iso(d)+'"'+(dis?" disabled":"")+'>'+g+'</button>';
+      }
+      html+='</div>';
+      cal.innerHTML=html;
+      var p=$("calPrev"), nx=$("calNext");
+      if(p) p.addEventListener("click",function(ev){ev.stopPropagation(); view=new Date(y,m-1,1); render();});
+      if(nx) nx.addEventListener("click",function(ev){ev.stopPropagation(); view=new Date(y,m+1,1); render();});
+      cal.querySelectorAll("button.day:not(:disabled)").forEach(function(b){
+        b.addEventListener("click",function(ev){ ev.stopPropagation(); pick(parse(b.getAttribute("data-d"))); });
+      });
+    }
+
+    btn.addEventListener("click",function(ev){ ev.stopPropagation(); if(cal.hidden){ if(selected){view=new Date(selected.getFullYear(),selected.getMonth(),1);} render(); cal.hidden=false; } else { cal.hidden=true; } });
+    document.addEventListener("click",function(ev){ if(cal.hidden) return; if(!cal.contains(ev.target) && ev.target!==btn){ cal.hidden=true; } });
+
+    pick(start); // data di default: primo giorno aperto
 
     privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
     ctaEl.addEventListener("click",function(){
       if(!privacyEl.checked){ return; }
-      var v=dateEl.value;
-      if(!v || !nomeEl.value.trim() || !telEl.value.trim()){ errEl.textContent="Servono data, nome e telefono per procedere."; return; }
-      var wd=parse(v).getDay();
-      if(ORARI[wd]===null){ errEl.textContent="Il "+GIORNI[wd]+" siamo chiusi: scegli un altro giorno."; return; }
+      if(!dateEl.value || !nomeEl.value.trim() || !telEl.value.trim()){ errEl.textContent="Servono data, nome e telefono per procedere."; return; }
       if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
       $("modulo").style.display="none"; $("conferma").style.display="block";
     });
