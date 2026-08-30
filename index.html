@@ -606,21 +606,49 @@
     var dateEl=$("data"), peopleEl=$("persone"), slotEl=$("orario"),
         nomeEl=$("nome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
     if (!dateEl || !peopleEl || !slotEl) return;
-    var t=new Date(); t.setHours(0,0,0,0);
-    var iso=function(d){var m=d.getMonth()+1,g=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g;};
-    dateEl.min=iso(t); if(!dateEl.value) dateEl.value=iso(t);
+
+    // Orari di apertura per giorno (0=Dom ... 6=Sab). null = chiuso.
+    // 'last' = ultimo slot prenotabile (30 min prima della chiusura).
+    var ORARI = { 0:{last:"22:30"}, 1:null, 2:{last:"22:30"}, 3:{last:"22:30"}, 4:{last:"22:30"}, 5:{last:"22:30"}, 6:{last:"23:00"} };
+    var GIORNI = ["domenica","luned\u00ec","marted\u00ec","mercoled\u00ec","gioved\u00ec","venerd\u00ec","sabato"];
+
+    function iso(d){var m=d.getMonth()+1,g=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g;}
+    function parse(v){var p=v.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
+    function slots(last){var out=[],h=19,m=0,lp=last.split(":"),lh=+lp[0],lm=+lp[1];while(h<lh||(h===lh&&m<=lm)){out.push((h<10?"0":"")+h+":"+(m<10?"0":"")+m);m+=30;if(m>=60){m=0;h++;}}return out;}
+
+    var today=new Date(); today.setHours(0,0,0,0);
+    var start=new Date(today); while(ORARI[start.getDay()]===null){ start.setDate(start.getDate()+1); }
+    dateEl.min=iso(today);
+    if(!dateEl.value) dateEl.value=iso(start);
+
     for(var n=1;n<=20;n++){var o=document.createElement("option");o.value=n;o.textContent=n+(n===1?" persona":" persone");peopleEl.appendChild(o);}
     peopleEl.value="2";
-    ["19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30"].forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
+
+    function riempiOrari(){
+      var v=dateEl.value; slotEl.innerHTML=""; errEl.textContent="";
+      if(!v){return;}
+      var wd=parse(v).getDay(), cfg=ORARI[wd];
+      if(cfg===null){
+        errEl.textContent="Il "+GIORNI[wd]+" siamo chiusi: scegli un altro giorno.";
+        var op=document.createElement("option");op.textContent="Chiuso";op.value="";slotEl.appendChild(op);
+        slotEl.disabled=true; return;
+      }
+      slotEl.disabled=false;
+      slots(cfg.last).forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
+    }
+    dateEl.addEventListener("change", riempiOrari);
+    dateEl.addEventListener("input", riempiOrari);
+    riempiOrari();
+
     privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
     ctaEl.addEventListener("click",function(){
       if(!privacyEl.checked){ return; }
-      if(!dateEl.value || !nomeEl.value.trim() || !telEl.value.trim()){
-        errEl.textContent="Servono data, nome e telefono per procedere.";
-        return;
-      }
-      $("modulo").style.display="none";
-      $("conferma").style.display="block";
+      var v=dateEl.value;
+      if(!v || !nomeEl.value.trim() || !telEl.value.trim()){ errEl.textContent="Servono data, nome e telefono per procedere."; return; }
+      var wd=parse(v).getDay();
+      if(ORARI[wd]===null){ errEl.textContent="Il "+GIORNI[wd]+" siamo chiusi: scegli un altro giorno."; return; }
+      if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
+      $("modulo").style.display="none"; $("conferma").style.display="block";
     });
   })();
 </script>
