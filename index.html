@@ -310,7 +310,8 @@
     .gnocco-grid > div:first-child { order:2; }
     /* Box offerta più compatto su mobile; foto a tutta larghezza sotto il testo */
     .offer-box { padding:32px 20px; border-radius:20px; grid-template-columns:1fr !important; }
-    .offer-img { height:auto !important; min-height:0 !important; }
+    .offer-img { height:300px !important; min-height:0 !important; object-fit:cover !important; }
+    .offer-contorno { text-align:center; justify-items:center; }
     .offer-cta { margin-left:auto; margin-right:auto; }
   }
   @media (max-width: 430px) {
@@ -364,7 +365,7 @@
           <li style="font-size:clamp(15px, 1.5vw, 17px); color:#f0f0f0; line-height:1.4">Lattuga</li>
           <li style="font-size:clamp(15px, 1.5vw, 17px); color:#f0f0f0; line-height:1.4">Maionese al bagnetto verde e limone</li>
         </ul>
-        <div style="display:grid; gap:6px; margin-top:22px; padding-top:18px; border-top:1px solid #262626; font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#ffd400; font-size:clamp(16px, 1.8vw, 20px)">
+        <div class="offer-contorno" style="display:grid; gap:6px; margin-top:22px; padding-top:18px; border-top:1px solid #262626; font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#ffd400; font-size:clamp(16px, 1.8vw, 20px)">
           <div>+ Contorno a scelta</div>
           <div>Gnocco fritto con lardo in omaggio</div>
         </div>
