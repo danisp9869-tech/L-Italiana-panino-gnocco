@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, follow">
+<title>Informativa sulla Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     INFORMATIVA PRIVACY & COOKIE (GDPR - Reg. UE 2016/679)
+     ───────────────────────────────────────────────────────────────────────
+     Per ogni cliente si tocca SOLO il blocco DATI qui sotto:
+       · i dati del ristorante devono combaciare con il CONFIG di index.html;
+       · `servizi` accende/spegne le sezioni: una sezione con flag false viene
+         rimossa dalla pagina e la numerazione dei capitoli si ricalcola da sola.
+     Se un giorno si aggiunge GA4, Google Ads o un banner cookie, va aggiunta
+     qui la relativa sezione e il relativo flag — non basta accendere nulla.
+     ⚠️ Fac-simile: farlo verificare da un legale/DPO prima dell'uso in
+        produzione e adattarlo alla situazione reale del ristorante.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+const DATI = {
+  ristorante:  "L'Italiana",
+  indirizzo:   "Via Roma, 45, 12040 Piobesi d'Alba (CN)",
+  email:       "info@ristoranteitaliana.it",     // email di contatto per la privacy (DA CONFERMARE)
+  telefono:    "+39 0173 216770",
+  piva:        "",                       // da compilare: appare nel box del Titolare solo se valorizzata
+  conservazioneMesi: 24,
+  aggiornamento: "30 agosto 2026",
+  // Servizi attivi su QUESTA landing: devono rispecchiare index.html
+  servizi: {
+    metaPixel:     false,
+    clarity:       false,
+    mappa:         true,   // widget Google Maps incorporato nella pagina
+    googleFonts:   false,  // i font della landing sono inline, nessuna richiesta a Google
+    googleSheets:  false,  // il modulo non è collegato a Google Sheets
+    newsletter:    true,   // casella facoltativa per le comunicazioni commerciali
+  },
+};
+</script>
+
+<style>
+:root{
+  --cream:#faf8f4; --warm-white:#ffffff; --ink:#1a1612; --ink-light:#4a4540;
+  --gold:#b8933a; --gold-pale:#fdf6e3; --gray-200:#e8e4de; --gray-400:#a09890;
+  --radius-md:16px;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);background:var(--cream);color:var(--ink);
+  line-height:1.65;font-size:15px;
+  padding-left:max(20px, env(safe-area-inset-left,0px));
+  padding-right:max(20px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:760px;margin:0 auto;padding:48px 0 64px}
+
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  color:var(--gold);font-size:13px;font-weight:600;margin-bottom:28px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.back-link:hover{text-decoration:underline}
+.back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.doc-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+h1{font-family:var(--font-display);font-size:clamp(26px,6vw,38px);font-weight:700;line-height:1.15;margin-bottom:10px}
+.doc-sub{color:var(--ink-light);font-size:14px;margin-bottom:8px}
+.doc-updated{color:var(--gray-400);font-size:13px;margin-bottom:36px}
+
+.card{
+  background:var(--warm-white);border:1px solid var(--gray-200);
+  border-radius:var(--radius-md);padding:clamp(22px,5vw,40px);
+  box-shadow:0 4px 20px rgba(26,22,18,.06);
+}
+h2{
+  font-family:var(--font-display);font-size:clamp(18px,4vw,22px);font-weight:600;
+  color:var(--ink);margin:32px 0 12px;padding-top:4px;
+}
+h2:first-of-type{margin-top:0}
+h2 .num{color:var(--gold);margin-right:8px}
+h3{
+  font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--ink);
+  margin:22px 0 8px;
+}
+p{margin-bottom:12px;color:var(--ink-light)}
+ul{margin:0 0 12px 22px;color:var(--ink-light)}
+li{margin-bottom:7px}
+strong{color:var(--ink);font-weight:600}
+em{color:inherit}
+a{color:var(--gold)}
+.data-box{
+  background:var(--gold-pale);border:1px solid rgba(184,147,58,.25);
+  border-radius:10px;padding:16px 20px;margin:8px 0 4px;
+}
+.data-box p{margin-bottom:4px;color:var(--ink)}
+.data-box p:last-child{margin-bottom:0}
+.svc{
+  background:var(--cream);border:1px solid var(--gray-200);border-radius:12px;
+  padding:16px 18px;margin:12px 0;
+}
+.svc h3{margin-top:0}
+.svc p:last-child{margin-bottom:0}
+.svc .meta{font-size:13px;color:var(--gray-400);margin-bottom:0}
+.svc .meta strong{color:var(--ink-light);font-weight:600}
+.rights-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 12px}
+.right-item{background:var(--cream);border:1px solid var(--gray-200);border-radius:10px;padding:12px 14px;font-size:14px}
+.right-item strong{display:block;color:var(--gold);font-size:13px;margin-bottom:2px}
+.defs dt{font-weight:600;color:var(--ink);margin-top:14px;font-size:14px}
+.defs dd{margin:2px 0 0;color:var(--ink-light);font-size:14px}
+.foot-note{margin-top:32px;font-size:12px;color:var(--gray-400);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="index.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Torna alla prenotazione
+  </a>
+
+  <div class="doc-eyebrow" id="restaurantEyebrow"></div>
+  <h1>Informativa sulla Privacy e Cookie Policy</h1>
+  <p class="doc-sub">Resa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 (“GDPR”), del D.lgs. 196/2003 e s.m.i. e dell'art. 122 del Codice Privacy in materia di Strumenti di Tracciamento.</p>
+  <p class="doc-updated" id="docUpdated"></p>
+
+  <div class="card">
+
+    <h2><span class="num"></span>Titolare del trattamento</h2>
+    <p>Il Titolare del trattamento dei dati personali raccolti tramite questo sito è:</p>
+    <div class="data-box">
+      <p><strong id="tName"></strong></p>
+      <p id="tAddr"></p>
+      <p id="tPivaLine">P.IVA: <span id="tPiva"></span></p>
+      <p id="tEmailLine">Email: <a id="tEmail"></a></p>
+      <p id="tPhone"></p>
+    </div>
+    <p>Il Titolare non ha nominato un Responsabile della Protezione dei Dati (DPO), non ricorrendone i presupposti di legge. Per qualsiasi questione relativa ai tuoi dati puoi rivolgerti direttamente ai recapiti qui sopra.</p>
+
+    <h2><span class="num"></span>Tipologie di Dati raccolti</h2>
+    <p>Fra i Dati Personali raccolti da questo sito, in modo autonomo o tramite terze parti, ci sono:</p>
+    <ul>
+      <li><strong>Dati di contatto:</strong> nome e cognome, numero di telefono, indirizzo email;</li>
+      <li><strong>Dati della prenotazione:</strong> data, orario e numero di persone;</li>
+      <li><strong>Eventuali richieste speciali</strong> da te indicate (es. allergie, esigenze particolari). Ti invitiamo a non inserire in questo campo dati non necessari, in particolare dati relativi alla salute;</li>
+      <li><strong>Dati di utilizzo e Strumenti di Tracciamento:</strong> indirizzo IP, tipo di browser e dispositivo, pagine visitate, orario e durata della visita, provenienza del traffico, clic, movimenti del mouse, posizione relativa allo scorrimento, eventi touch e sequenza delle pagine consultate.</li>
+    </ul>
+    <p>I Dati Personali possono essere liberamente forniti da te oppure, nel caso dei Dati di Utilizzo, raccolti automaticamente durante l'uso del sito. Salvo diversa indicazione, i dati contrassegnati come obbligatori nel modulo sono necessari a erogare il servizio: se rifiuti di comunicarli potrebbe essere impossibile gestire la tua prenotazione. Ti assumi la responsabilità dei Dati Personali di terzi che dovessi comunicare tramite questo sito (ad esempio i nomi degli altri commensali).</p>
+
+    <h2><span class="num"></span>Finalità e base giuridica</h2>
+    <p>I tuoi dati sono trattati per le seguenti finalità:</p>
+    <ul>
+      <li><strong>Gestione della prenotazione</strong> del tavolo e delle comunicazioni ad essa collegate (conferma, modifica, annullamento). Base giuridica: esecuzione di misure precontrattuali e del servizio da te richiesto — <em>art. 6, par. 1, lett. b) GDPR</em>;</li>
+      <li>Trattamento effettuato anche sulla base del <strong>consenso</strong> da te prestato spuntando l'apposita casella nel modulo — <em>art. 6, par. 1, lett. a) GDPR</em>;</li>
+      <li data-if="newsletter"><strong>Invio di comunicazioni commerciali</strong>, se hai spuntato la casella facoltativa dedicata — <em>art. 6, par. 1, lett. a) GDPR</em> (vedi la sezione dedicata);</li>
+      <li><strong>Statistica, misurazione e pubblicità</strong> tramite gli Strumenti di Tracciamento descritti più avanti — <em>art. 6, par. 1, lett. a) GDPR</em> e art. 122 del Codice Privacy per gli strumenti non necessari;</li>
+      <li><strong>Sicurezza del sito, prevenzione degli abusi e difesa in giudizio</strong> — legittimo interesse del Titolare, <em>art. 6, par. 1, lett. f) GDPR</em>;</li>
+      <li>Adempimento di eventuali <strong>obblighi di legge</strong> — <em>art. 6, par. 1, lett. c) GDPR</em>.</li>
+    </ul>
+    <p>Puoi sempre chiedere al Titolare di chiarire la concreta base giuridica di ciascun trattamento.</p>
+
+    <div data-if="newsletter">
+      <h2><span class="num"></span>Comunicazioni commerciali (marketing)</h2>
+      <p>Nel modulo di prenotazione trovi una <strong>seconda casella, separata e facoltativa</strong>, con cui puoi
+         chiedere di ricevere le nostre offerte e novità. Spuntarla non è necessario per prenotare: se non la
+         spunti, la tua prenotazione viene gestita esattamente allo stesso modo.</p>
+      <ul>
+        <li><strong>Finalità:</strong> invio di comunicazioni promozionali sulle iniziative del ristorante
+            (menu speciali, eventi, proposte stagionali) tramite email.</li>
+        <li><strong>Base giuridica:</strong> il tuo <strong>consenso</strong> libero, specifico e revocabile —
+            <em>art. 6, par. 1, lett. a) GDPR</em>. La casella non è mai pre-selezionata.</li>
+        <li><strong>Dati usati:</strong> il solo indirizzo email, insieme al nome per personalizzare il messaggio.</li>
+        <li><strong>Conservazione:</strong> fino alla revoca del consenso; da quel momento l'indirizzo non viene
+            più utilizzato per l'invio di comunicazioni commerciali.</li>
+      </ul>
+      <p>Puoi <strong>revocare il consenso in qualsiasi momento</strong>, senza alcuna formalità e senza che ciò
+         pregiudichi la liceità degli invii già effettuati: usa il link di disiscrizione presente in fondo a ogni
+         email oppure <span id="contattoMarketing"></span>. La revoca non ha alcun effetto sulla gestione delle
+         tue prenotazioni.</p>
+      <p>I tuoi dati <strong>non vengono ceduti o venduti a terzi</strong> per finalità di marketing.</p>
+    </div>
+
+    <h2><span class="num"></span>Strumenti di Tracciamento e Cookie</h2>
+    <p>Questo sito utilizza <strong>Strumenti di Tracciamento</strong> — cookie e tecnologie analoghe (identificativi univoci, script integrati, pixel, <em>local storage</em>) — che consentono di conservare o leggere informazioni sul tuo dispositivo. Di seguito trovi l'elenco completo di quelli attivi, con la finalità, i dati trattati e il luogo del trattamento.</p>
+
+    <h3>a) Strumenti necessari</h3>
+    <p>Sono indispensabili al funzionamento del sito e all'invio del modulo di prenotazione (ad esempio la memoria temporanea dei dati che stai compilando e le misure antifrode del provider). Non richiedono consenso, ai sensi dell'art. 122 del Codice Privacy, e non vengono usati per profilarti.</p>
+
+    <h3>b) Strumenti di terze parti</h3>
+
+    <div class="svc" data-if="googleSheets">
+      <h3>Google Apps Script e Google Fogli — Google Ireland Limited</h3>
+      <p>I dati inseriti nel modulo di prenotazione vengono trasmessi, tramite Google Apps Script, a un foglio di calcolo Google Fogli utilizzato dal ristorante per gestire le prenotazioni. Google agisce quale Responsabile del trattamento ai sensi dell'art. 28 GDPR.</p>
+      <p class="meta"><strong>Dati Personali trattati:</strong> nome; cognome; numero di telefono; email; dati della prenotazione; eventuali richieste speciali; Dati di utilizzo.<br>
+      <strong>Luogo del trattamento:</strong> Irlanda — <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    </div>
+
+    <div class="svc" data-if="metaPixel">
+      <h3>Meta Pixel — monitoraggio conversioni, remarketing e pubblici personalizzati — Meta Platforms Ireland Limited</h3>
+      <p>Il pixel di Meta collega i dati provenienti dal network pubblicitario di Meta (Facebook, Instagram, Audience Network) con le azioni compiute su questo sito, per misurare le conversioni delle inserzioni, mostrare annunci pubblicitari a chi ha già visitato il sito (<em>remarketing</em>) e costruire pubblici personalizzati e simili (<em>lookalike</em>).</p>
+      <p>Puoi opporti all'uso dei tuoi dati per la personalizzazione degli annunci dalle <a href="https://www.facebook.com/adpreferences/ad_settings" target="_blank" rel="noopener">preferenze sulle inserzioni</a> del tuo account Meta o dalla pagina di <a href="https://www.youronlinechoices.com/it/le-tue-scelte" target="_blank" rel="noopener">opt-out settoriale</a>.</p>
+      <p class="meta"><strong>Dati Personali trattati:</strong> Dati di utilizzo; Strumenti di Tracciamento; identificatori pubblicitari.<br>
+      <strong>Luogo del trattamento:</strong> Irlanda — <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Privacy Policy</a> — <a href="https://www.facebook.com/help/247395082112892" target="_blank" rel="noopener">Opt out</a>.</p>
+    </div>
+
+    <div class="svc" data-if="clarity">
+      <h3>Microsoft Clarity — Microsoft Ireland Operations Limited</h3>
+      <p>Clarity è un servizio di statistica e analisi del comportamento che registra in forma aggregata e pseudonimizzata il modo in cui le pagine vengono utilizzate (mappe di calore e riproduzione anonima delle sessioni), allo scopo di migliorare il sito. Il servizio maschera per impostazione predefinita il contenuto dei campi dei moduli.</p>
+      <p class="meta"><strong>Dati Personali trattati:</strong> Dati di utilizzo; clic; movimenti del mouse; posizione relativa allo scorrimento; eventi touch; informazioni sul browser e sul dispositivo; Strumenti di Tracciamento.<br>
+      <strong>Luogo del trattamento:</strong> Irlanda / Stati Uniti — <a href="https://privacy.microsoft.com/it-it/privacystatement" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    </div>
+
+    <div class="svc" data-if="googleFonts">
+      <h3>Google Fonts — Google Ireland Limited</h3>
+      <p>Servizio di visualizzazione di stili di carattere che permette a questo sito di integrare tali contenuti nelle proprie pagine. Per erogare il font, il servizio riceve l'indirizzo IP del visitatore.</p>
+      <p class="meta"><strong>Dati Personali trattati:</strong> Dati di utilizzo.<br>
+      <strong>Luogo del trattamento:</strong> Irlanda — <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    </div>
+
+    <div class="svc" data-if="mappa">
+      <h3>Widget Google Maps — Google Ireland Limited</h3>
+      <p>Servizio di visualizzazione di mappe integrato nella pagina per mostrare la posizione del ristorante. Il widget può raccogliere dati sul traffico della pagina in cui è installato anche se non lo utilizzi.</p>
+      <p class="meta"><strong>Dati Personali trattati:</strong> Dati di utilizzo; Strumenti di Tracciamento.<br>
+      <strong>Luogo del trattamento:</strong> Irlanda — <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    </div>
+
+    <h3>c) Come gestire o disattivare gli Strumenti di Tracciamento</h3>
+    <p>Puoi gestire le preferenze relative agli Strumenti di Tracciamento direttamente dal tuo browser, impedendone l'installazione o cancellando quelli già presenti — la disattivazione degli strumenti necessari può però pregiudicare il funzionamento del sito:
+      <a href="https://support.google.com/chrome/answer/95647?hl=it" target="_blank" rel="noopener">Chrome</a>,
+      <a href="https://support.mozilla.org/it/kb/Bloccare%20i%20cookie" target="_blank" rel="noopener">Firefox</a>,
+      <a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>,
+      <a href="https://support.microsoft.com/it-it/microsoft-edge" target="_blank" rel="noopener">Edge</a>.</p>
+    <p><strong>Pubblicità basata sugli interessi.</strong> Oltre alle funzioni di opt-out dei singoli servizi elencati sopra, puoi disattivare in modo trasversale gli annunci basati sugli interessi tramite
+      <a href="https://www.youronlinechoices.com/it/le-tue-scelte" target="_blank" rel="noopener">Your Online Choices</a> (EDAA),
+      <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">Network Advertising Initiative</a> o
+      <a href="https://optout.aboutads.info/" target="_blank" rel="noopener">DAA</a>.</p>
+
+    <h2><span class="num"></span>Modalità del trattamento</h2>
+    <p>I dati sono trattati con strumenti informatici e/o telematici, e in alcuni casi cartacei, con logiche strettamente correlate alle finalità indicate e mediante misure di sicurezza tecniche e organizzative adeguate a prevenire la perdita, l'uso illecito o non corretto e gli accessi non autorizzati. Oltre al Titolare, possono avere accesso ai dati le persone autorizzate al trattamento nell'ambito dell'organizzazione del ristorante e i fornitori indicati nella sezione seguente.</p>
+
+    <h2><span class="num"></span>Destinatari dei dati</h2>
+    <p>I dati possono essere trattati da personale autorizzato del ristorante e da fornitori di servizi tecnologici che operano quali <strong>Responsabili del trattamento</strong> ai sensi dell'art. 28 GDPR: il fornitore di hosting del sito, i servizi cloud e di archiviazione (Google, per la raccolta e la gestione delle prenotazioni) e i servizi indicati nella sezione sugli Strumenti di Tracciamento. I dati possono inoltre essere comunicati alle autorità competenti, se previsto dalla legge. I tuoi dati <strong>non sono oggetto di diffusione</strong> e non vengono venduti o ceduti a terzi per finalità di marketing. L'elenco aggiornato dei Responsabili può essere richiesto in qualsiasi momento al Titolare.</p>
+
+    <h2><span class="num"></span>Trasferimento dei dati extra-UE</h2>
+    <p>Alcuni fornitori di servizi (es. Google, Meta, Microsoft) potrebbero trattare i dati anche al di fuori dello Spazio Economico Europeo, in particolare negli Stati Uniti. Tali trasferimenti avvengono nel rispetto del Capo V del GDPR, sulla base di <strong>decisioni di adeguatezza</strong> della Commissione Europea (per gli operatori certificati nell'ambito del <em>EU-US Data Privacy Framework</em>) o di adeguate garanzie quali le <strong>Clausole Contrattuali Standard</strong>. Hai diritto di ottenere informazioni sulla base giuridica del trasferimento e copia delle garanzie adottate scrivendo al Titolare.</p>
+
+    <h2><span class="num"></span>Periodo di conservazione</h2>
+    <p>I dati sono conservati per il tempo strettamente necessario a gestire la prenotazione e i conseguenti adempimenti, e comunque per un periodo non superiore a <strong id="tKeep"></strong> dalla raccolta, salvo diversi obblighi di legge o necessità di accertamento e difesa di un diritto.
+       <span data-if="newsletter">I dati usati per le <strong>comunicazioni commerciali</strong>, se hai prestato il relativo consenso, sono conservati fino alla revoca dello stesso.</span>
+       I dati raccolti tramite Strumenti di Tracciamento sono conservati per la durata indicata dai rispettivi fornitori nelle policy linkate sopra. Al termine del periodo di conservazione i dati vengono cancellati: da quel momento i diritti di accesso, cancellazione, rettifica e portabilità non possono più essere esercitati.</p>
+
+    <h2><span class="num"></span>Conferimento dei dati</h2>
+    <p>Il conferimento dei dati contrassegnati come obbligatori nel modulo è necessario per dar seguito alla tua prenotazione: l'eventuale rifiuto comporta l'impossibilità di completare e gestire la prenotazione. Il conferimento delle “richieste speciali” è invece facoltativo.
+       <span data-if="newsletter">È altrettanto <strong>facoltativo il consenso alle comunicazioni commerciali</strong>: negarlo non preclude in alcun modo la prenotazione né la qualità del servizio.</span></p>
+
+    <h2><span class="num"></span>I tuoi diritti</h2>
+    <p>In qualità di interessato, puoi esercitare in qualsiasi momento i diritti previsti dagli artt. 15-22 del GDPR:</p>
+    <div class="rights-grid">
+      <div class="right-item"><strong>Accesso</strong>Sapere quali dati trattiamo</div>
+      <div class="right-item"><strong>Rettifica</strong>Correggere dati inesatti</div>
+      <div class="right-item"><strong>Cancellazione</strong>“Diritto all'oblio”</div>
+      <div class="right-item"><strong>Limitazione</strong>Limitare il trattamento</div>
+      <div class="right-item"><strong>Portabilità</strong>Ricevere i tuoi dati</div>
+      <div class="right-item"><strong>Opposizione</strong>Opporti al trattamento</div>
+      <div class="right-item"><strong>Revoca consenso</strong>In ogni momento, senza pregiudicare la liceità del trattamento pregresso</div>
+      <div class="right-item"><strong>Reclamo</strong>Al Garante Privacy</div>
+    </div>
+    <p><strong>Dettagli sul diritto di opposizione.</strong> Quando i dati sono trattati per il perseguimento di un legittimo interesse del Titolare, puoi opporti al trattamento per motivi connessi alla tua situazione particolare. Se i tuoi dati sono trattati per finalità di <strong>marketing diretto</strong>, puoi opporti in qualsiasi momento, gratuitamente e senza fornire alcuna motivazione: da quel momento i dati non saranno più trattati per tali finalità.</p>
+    <p>Per esercitare i tuoi diritti puoi <span id="contattoDiritti"></span>. La richiesta è gratuita e il Titolare risponde nel più breve tempo possibile e comunque entro un mese. Hai inoltre il diritto di proporre reclamo all'Autorità di controllo — il <strong>Garante per la protezione dei dati personali</strong> (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>) — o di agire in sede giudiziale.</p>
+
+    <h2><span class="num"></span>Ulteriori informazioni sul trattamento</h2>
+    <h3>Log di sistema e manutenzione</h3>
+    <p>Per necessità legate al funzionamento e alla manutenzione, questo sito e gli eventuali servizi terzi da esso utilizzati possono raccogliere log di sistema, ossia file che registrano le interazioni e che possono contenere anche dati personali, quale l'indirizzo IP.</p>
+    <h3>Difesa in giudizio</h3>
+    <p>I tuoi dati personali possono essere utilizzati dal Titolare in giudizio o nelle fasi preparatorie alla sua eventuale instaurazione, per la difesa da abusi nell'utilizzo di questo sito o dei servizi connessi. Il Titolare potrebbe inoltre essere obbligato a rivelare i dati per ordine delle autorità pubbliche.</p>
+    <h3>Informative specifiche</h3>
+    <p>Su tua richiesta, e in aggiunta alle informazioni contenute in questa informativa, il sito può fornirti informative aggiuntive e contestuali riguardanti servizi specifici o la raccolta e il trattamento di dati personali.</p>
+    <h3>Minori</h3>
+    <p>Il servizio di prenotazione non è rivolto a minori di 14 anni: il Titolare non raccoglie consapevolmente dati di minori senza il consenso di chi esercita la responsabilità genitoriale.</p>
+
+    <h2><span class="num"></span>Modifiche a questa informativa</h2>
+    <p>Il Titolare si riserva il diritto di apportare modifiche alla presente informativa in qualunque momento, dandone notizia su questa pagina e, ove tecnicamente e legalmente fattibile, tramite uno dei recapiti di cui è in possesso. Ti invitiamo a consultarla periodicamente, facendo riferimento alla data di ultimo aggiornamento indicata in alto. Qualora le modifiche interessino trattamenti la cui base giuridica è il consenso, il Titolare provvederà a raccoglierlo nuovamente, se necessario.</p>
+
+    <h2><span class="num"></span>Definizioni e riferimenti legali</h2>
+    <dl class="defs">
+      <dt>Dati Personali (o Dati)</dt>
+      <dd>Qualunque informazione che, direttamente o indirettamente, anche in collegamento con qualsiasi altra informazione, renda identificata o identificabile una persona fisica.</dd>
+      <dt>Dati di Utilizzo</dt>
+      <dd>Informazioni raccolte automaticamente attraverso questo sito (anche da applicazioni di parti terze in esso integrate), tra cui: indirizzi IP o nomi a dominio, indirizzi in notazione URI, orario della richiesta, metodo utilizzato, dimensione del file ottenuto in risposta, codice di stato della risposta, paese di provenienza, caratteristiche del browser e del sistema operativo, tempo di permanenza su ciascuna pagina e itinerario seguito all'interno del sito.</dd>
+      <dt>Utente / Interessato</dt>
+      <dd>L'individuo che utilizza questo sito e la persona fisica cui si riferiscono i Dati Personali.</dd>
+      <dt>Titolare del Trattamento</dt>
+      <dd>La persona fisica o giuridica che, singolarmente o insieme ad altri, determina le finalità e i mezzi del trattamento di dati personali, ivi comprese le misure di sicurezza.</dd>
+      <dt>Responsabile del Trattamento</dt>
+      <dd>Il soggetto che tratta dati personali per conto del Titolare, secondo quanto esposto nella presente informativa.</dd>
+      <dt>Cookie</dt>
+      <dd>Strumenti di Tracciamento che consistono in piccole porzioni di dati conservate all'interno del browser dell'Utente.</dd>
+      <dt>Strumento di Tracciamento</dt>
+      <dd>Qualsiasi tecnologia — cookie, identificativi univoci, web beacon, script integrati, e-tag, fingerprinting — che consenta di tracciare gli Utenti, per esempio raccogliendo o salvando informazioni sul dispositivo.</dd>
+      <dt>Riferimenti legali</dt>
+      <dd>Regolamento (UE) 2016/679 (GDPR); D.lgs. 30 giugno 2003 n. 196 e s.m.i.; Linee guida del Garante sull'uso dei cookie e di altri strumenti di tracciamento del 10 giugno 2021. Ove non diversamente specificato, questa informativa riguarda esclusivamente questo sito.</dd>
+    </dl>
+
+  </div>
+
+  <p class="foot-note">Powered by <strong>Food Media Lab</strong></p>
+</div>
+
+<script>
+(function(){
+  // Sezioni opzionali: via gli elementi il cui servizio non è attivo su questa landing.
+  const svc = DATI.servizi || {};
+  document.querySelectorAll('[data-if]').forEach(function(el){
+    if(!svc[el.getAttribute('data-if')]) el.remove();
+  });
+
+  // Numerazione dei capitoli calcolata dopo la potatura: niente buchi.
+  let n = 0;
+  document.querySelectorAll('.card h2 .num').forEach(function(el){ el.textContent = (++n) + '.'; });
+
+  const mesi = DATI.conservazioneMesi;
+  const keepTxt = (mesi % 12 === 0) ? (mesi/12) + (mesi===12?' anno':' anni') : mesi + ' mesi';
+  document.title = 'Informativa sulla Privacy · ' + DATI.ristorante;
+  document.getElementById('restaurantEyebrow').textContent = DATI.ristorante;
+  document.getElementById('docUpdated').textContent = 'Ultimo aggiornamento: ' + DATI.aggiornamento;
+  document.getElementById('tName').textContent = DATI.ristorante;
+  document.getElementById('tAddr').textContent = DATI.indirizzo;
+  document.getElementById('tPhone').textContent = 'Tel: ' + DATI.telefono;
+
+  // P.IVA: la riga compare solo se il dato c'è.
+  if(DATI.piva){ document.getElementById('tPiva').textContent = DATI.piva; }
+  else { document.getElementById('tPivaLine').remove(); }
+
+  // Gestione contatti: se l'email non è ancora disponibile, si usa il telefono.
+  const telLink = '<a href="tel:' + DATI.telefono.replace(/\s/g,'') + '">' + DATI.telefono + '</a>';
+  const setHtml = function(id, html){ const el = document.getElementById(id); if(el) el.innerHTML = html; };
+  if(DATI.email){
+    const em1 = document.getElementById('tEmail');
+    em1.textContent = DATI.email; em1.href = 'mailto:' + DATI.email;
+    setHtml('contattoDiritti',
+      'scrivere a <a href="mailto:' + DATI.email + '">' + DATI.email + '</a> o contattare il Titolare al numero ' + telLink);
+    setHtml('contattoMarketing',
+      'scriverci a <a href="mailto:' + DATI.email + '">' + DATI.email + '</a>');
+  } else {
+    // Nessuna email: nascondo la riga email e rimando al telefono
+    document.getElementById('tEmailLine').remove();
+    setHtml('contattoDiritti',
+      'contattare il Titolare ai recapiti sopra indicati, al numero ' + telLink);
+    setHtml('contattoMarketing',
+      'contattare il Titolare al numero ' + telLink);
+  }
+  document.getElementById('tKeep').textContent = keepTxt;
+})();
+</script>
+</body>
+</html>
