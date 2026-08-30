@@ -280,12 +280,10 @@
     padding: 48px 44px;
     box-shadow: 0 0 0 1px rgba(255, 212, 0, 0.12), 0 24px 60px rgba(0, 0, 0, 0.5);
     text-align: left;
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
   }
   .offer-box ul { margin-left: 0; margin-right: 0; }
   .offer-box .price-row { justify-content: flex-start; }
-  .offer-img { max-height: 460px; object-fit: cover; object-position: center; }
+  .offer-img { height: 480px !important; object-fit: cover !important; object-position: center; }
   .offer-box::before {
     content: "";
     position: absolute;
@@ -305,8 +303,9 @@
     .hero-title { font-size:64px !important; }
     /* Gnocco fritto: foto sotto il testo su mobile */
     .gnocco-grid > div:first-child { order:2; }
-    /* Box offerta più compatto su mobile */
+    /* Box offerta più compatto su mobile; foto a tutta larghezza sotto il testo */
     .offer-box { padding:32px 20px; border-radius:20px; }
+    .offer-img { height:auto !important; min-height:0 !important; }
   }
   @media (max-width: 430px) {
     .site-tagline { display:none !important; }
