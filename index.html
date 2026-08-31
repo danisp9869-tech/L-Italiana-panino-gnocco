@@ -355,6 +355,9 @@
   .book .err { margin-top:12px; font-size:13px; color:#e8121a; min-height:18px; }
   .book .conf-title { font-family:'Barlow Condensed', sans-serif; font-size:34px; font-weight:700; text-transform:uppercase; color:#0a0a0a; line-height:1; }
   .book .conf-text { margin:14px 0 0; color:#555; font-size:17px; line-height:1.6; }
+  .book .conf-gnocco { text-align:center; margin:12px 0 0; font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#a67c00; font-size:clamp(18px, 2.4vw, 22px); line-height:1.15; }
+  .book .rebook-link { background:none; border:none; color:#cf8f00; font-size:14px; font-weight:700; text-decoration:underline; cursor:pointer; font-family:inherit; padding:6px; }
+  .book .rebook-link:hover { color:#a67c00; }
 
   /* Date picker personalizzato (lunedì di chiusura non selezionabile) */
   .book .datepick { width:100%; text-align:left; padding:13px 14px; background:var(--field); border:1px solid var(--bordo); border-radius:10px; color:var(--ink); font-size:16px; font-family:inherit; min-height:48px; box-shadow:0 2px 5px rgba(0,0,0,0.08); cursor:pointer; }
@@ -521,9 +524,12 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       </div>
       <div class="book" id="conferma" style="display:none">
         <div class="conf-title">Prenotazione confermata</div>
-        <p class="conf-text">Ti aspettiamo da <b>Ristorante L'Italiana</b>: ti aspetta uno gnocco fritto di benvenuto.</p>
+        <p class="conf-text">Ti aspettiamo da <b>Ristorante L'Italiana</b>.</p>
+        <p class="conf-gnocco">🥟 Ti aspetta uno gnocco fritto di benvenuto</p>
         <div class="conf-recap" id="recap"></div>
-        <button type="button" class="book-cta" id="reBook">Prenota di nuovo</button>
+        <div style="text-align:center; margin-top:18px">
+          <button type="button" id="reBook" class="rebook-link">Prenota di nuovo</button>
+        </div>
       </div>
     </div>
   </section>
