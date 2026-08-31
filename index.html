@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>L'Italiana — Offerta Special Guest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>/* vietnamese */
@@ -250,7 +250,8 @@
 </style>
 <style>
   html, body { margin:0; padding:0; background:#0a0a0a; }
-  html { scroll-behavior:smooth; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  img { max-width:100%; }
   #prenota { scroll-margin-top:80px; }
   * { box-sizing:border-box; }
   a { color:#ffb200; text-decoration:none; }
@@ -303,11 +304,12 @@
 
   /* Desktop: hero contenuto in una sola schermata */
   @media (min-width: 641px) {
-    .hero-section { min-height: calc(100vh - 74px) !important; padding-top: 44px !important; padding-bottom: 52px !important; }
+    .hero-section { min-height: calc(100vh - 74px) !important; min-height: calc(100dvh - 74px) !important; padding-top: 44px !important; padding-bottom: 52px !important; }
   }
 
   /* Ottimizzazioni mobile — vincono sugli stili inline con !important */
   @media (max-width: 640px) {
+    .hero-section { min-height: calc(100vh - 64px) !important; min-height: calc(100dvh - 64px) !important; }
     .site-header { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
     .site-name { font-size:19px !important; letter-spacing:0.10em !important; }
     .header-cta { font-size:13px !important; letter-spacing:0.10em !important; padding:10px 14px !important; white-space:nowrap !important; flex:0 0 auto; }
