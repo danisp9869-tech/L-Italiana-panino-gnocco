@@ -500,8 +500,12 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
           <select id="orario" required></select>
         </div>
         <div class="field">
-          <label for="nome">4 &middot; Il tuo nome</label>
-          <input type="text" id="nome" autocomplete="name" placeholder="Nome e cognome" required>
+          <label for="nome">4 &middot; Nome</label>
+          <input type="text" id="nome" autocomplete="given-name" placeholder="Il tuo nome" required>
+        </div>
+        <div class="field">
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" autocomplete="family-name" placeholder="Il tuo cognome" required>
         </div>
         <div class="field">
           <label for="telefono">Telefono</label>
@@ -666,8 +670,13 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     var $ = function (id) { return document.getElementById(id); };
     var dateEl=$("data"), btn=$("dataBtn"), cal=$("cal"),
         peopleEl=$("persone"), slotEl=$("orario"),
-        nomeEl=$("nome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
+        nomeEl=$("nome"), cognomeEl=$("cognome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
     if (!dateEl || !peopleEl || !slotEl || !btn || !cal) return;
+
+    // URL dell'app Google Apps Script (/exec) che scrive la prenotazione sul foglio.
+    // Incolla qui l'URL dopo aver pubblicato lo script (Distribuisci -> App web).
+    // Lasciandolo "" il form mostra comunque la conferma ma non scrive sul foglio.
+    var SHEET_URL = "";
 
     var ORARI = { 0:{last:"22:30"}, 1:null, 2:{last:"22:30"}, 3:{last:"22:30"}, 4:{last:"22:30"}, 5:{last:"22:30"}, 6:{last:"23:00"} };
     var GIORNI = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
@@ -740,16 +749,32 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
     ctaEl.addEventListener("click",function(){
       if(!privacyEl.checked){ return; }
-      if(!dateEl.value || !nomeEl.value.trim() || !telEl.value.trim()){ errEl.textContent="Servono data, nome e telefono per procedere."; return; }
+      var nome=nomeEl.value.trim(), cognome=cognomeEl.value.trim();
+      if(!dateEl.value || !nome || !cognome || !telEl.value.trim()){ errEl.textContent="Servono data, nome, cognome e telefono per procedere."; return; }
       if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
-      if(window.fbq) fbq("track","Lead",{content_name:"Prenotazione Special Guest", value:16.90, currency:"EUR"});
-      var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
-      var em=$("email").value.trim(), ri=$("richieste").value.trim();
-      var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
-      var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nomeEl.value.trim()],["Telefono",telEl.value.trim()]];
-      if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
-      $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
-      $("modulo").style.display="none"; $("conferma").style.display="block";
+      function mostraConferma(){
+        if(window.fbq) fbq("track","Lead",{content_name:"Hamburger Montanaro 16,90\u20ac", value:16.90, currency:"EUR"});
+        var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
+        var em=$("email").value.trim(), ri=$("richieste").value.trim();
+        var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
+        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nome+" "+cognome],["Telefono",telEl.value.trim()]];
+        if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
+        $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
+        $("modulo").style.display="none"; $("conferma").style.display="block";
+        window.scrollTo({top: document.getElementById("prenota").getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
+      }
+      if(!SHEET_URL){ mostraConferma(); return; }
+      var _t=ctaEl.textContent; ctaEl.disabled=true; ctaEl.textContent="Invio in corso\u2026";
+      var body=new URLSearchParams({
+        data:dateEl.value, ora:slotEl.value, persone:peopleEl.value,
+        nome:nome, cognome:cognome, telefono:telEl.value.trim(),
+        email:$("email").value.trim(), richieste:$("richieste").value.trim(),
+        privacy:(privacyEl.checked?"S\u00ec":"No"), marketing:($("marketing").checked?"S\u00ec":"No"),
+        offerta:"Hamburger Montanaro 16,90\u20ac"
+      });
+      fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:body})
+        .then(function(){ mostraConferma(); })
+        .catch(function(){ ctaEl.disabled=false; ctaEl.textContent=_t; errEl.textContent="Connessione assente. Chiamaci per confermare: 0173 216770"; });
     });
     $("reBook").addEventListener("click", function(){
       $("conferma").style.display="none"; $("modulo").style.display="block";
