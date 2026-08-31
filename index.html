@@ -371,6 +371,12 @@
   .book .cal-grid button.day:hover:not(:disabled) { background:var(--field); }
   .book .cal-grid button.day:disabled { color:#cfc7bf; cursor:not-allowed; text-decoration:line-through; }
   .book .cal-grid button.day.sel { background:#ffb200; color:#0a0a0a; font-weight:700; }
+
+  .book .conf-recap { margin:18px 0 22px; border:1px solid var(--bordo); border-radius:12px; overflow:hidden; background:#faf8f5; }
+  .book .conf-recap .rr { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:12px 14px; border-top:1px solid var(--bordo); }
+  .book .conf-recap .rr:first-child { border-top:none; }
+  .book .conf-recap .rr span { color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; font-size:11px; font-weight:700; flex:0 0 auto; }
+  .book .conf-recap .rr b { color:var(--ink); font-size:15px; text-align:right; }
 </style>
 
 <!-- Meta Pixel Code -->
@@ -514,8 +520,10 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         <div class="err" id="err"></div>
       </div>
       <div class="book" id="conferma" style="display:none">
-        <div class="conf-title">Richiesta inviata</div>
-        <p class="conf-text">Grazie, ti richiamiamo per confermare il tavolo. Il gnocco fritto con lardo alle erbe &egrave; gi&agrave; segnato.</p>
+        <div class="conf-title">Prenotazione confermata</div>
+        <p class="conf-text">Ti aspettiamo da <b>Ristorante L'Italiana</b>: ti aspetta uno gnocco fritto di benvenuto.</p>
+        <div class="conf-recap" id="recap"></div>
+        <button type="button" class="book-cta" id="reBook">Prenota di nuovo</button>
       </div>
     </div>
   </section>
@@ -724,7 +732,20 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       if(!dateEl.value || !nomeEl.value.trim() || !telEl.value.trim()){ errEl.textContent="Servono data, nome e telefono per procedere."; return; }
       if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
       if(window.fbq) fbq("track","Lead",{content_name:"Prenotazione Special Guest", value:16.90, currency:"EUR"});
+      var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
+      var em=$("email").value.trim(), ri=$("richieste").value.trim();
+      var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
+      var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nomeEl.value.trim()],["Telefono",telEl.value.trim()]];
+      if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
+      $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
       $("modulo").style.display="none"; $("conferma").style.display="block";
+    });
+    $("reBook").addEventListener("click", function(){
+      $("conferma").style.display="none"; $("modulo").style.display="block";
+      nomeEl.value=""; telEl.value=""; $("email").value=""; $("richieste").value="";
+      privacyEl.checked=false; ctaEl.disabled=true; errEl.textContent="";
+      var target=document.getElementById("prenota");
+      window.scrollTo({top: target.getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
     });
   })();
 </script>
