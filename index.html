@@ -745,16 +745,15 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
     ctaEl.addEventListener("click",function(){
       if(!privacyEl.checked){ return; }
-      var fullName=nomeEl.value.trim();
-      var _p=fullName.split(/\s+/), nome=_p.shift()||"", cognome=_p.join(" ");
-      if(!dateEl.value || !fullName || !telEl.value.trim()){ errEl.textContent="Servono nome e cognome, data e telefono per procedere."; return; }
+      var nome=nomeEl.value.trim();
+      if(!dateEl.value || !nome || !telEl.value.trim()){ errEl.textContent="Servono nome e cognome, data e telefono per procedere."; return; }
       if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
       function mostraConferma(){
         if(window.fbq) fbq("track","Lead",{content_name:"Hamburger Montanaro 16,90\u20ac", value:16.90, currency:"EUR"});
         var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
         var em=$("email").value.trim(), ri=$("richieste").value.trim();
         var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
-        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",fullName],["Telefono",telEl.value.trim()]];
+        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nome],["Telefono",telEl.value.trim()]];
         if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
         $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
         $("modulo").style.display="none"; $("conferma").style.display="block";
@@ -764,7 +763,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       var _t=ctaEl.textContent; ctaEl.disabled=true; ctaEl.textContent="Invio in corso\u2026";
       var body=new URLSearchParams({
         data:dateEl.value, ora:slotEl.value, persone:peopleEl.value,
-        nome:nome, cognome:cognome, telefono:telEl.value.trim(),
+        nome:nome, telefono:telEl.value.trim(),
         email:$("email").value.trim(), richieste:$("richieste").value.trim(),
         privacy:(privacyEl.checked?"S\u00ec":"No"), marketing:($("marketing").checked?"S\u00ec":"No"),
         offerta:"Hamburger Montanaro 16,90\u20ac"

@@ -35,7 +35,7 @@ var RESTAURANT_MAPS      = 'https://www.google.com/maps/search/?api=1&query=Via+
 
 // Colonne del foglio (in quest'ordine). Comprende tutti i dati richiesti:
 // Nome, Cognome, Data, Coperti, Telefono, Email, Privacy, Marketing.
-var INTESTAZIONI = ['Data', 'Ora', 'Coperti', 'Nome', 'Cognome', 'Telefono', 'Email', 'Richieste', 'Privacy', 'Marketing', 'Offerta', 'Creata'];
+var INTESTAZIONI = ['Data', 'Ora', 'Coperti', 'Nome', 'Telefono', 'Email', 'Richieste', 'Privacy', 'Marketing', 'Offerta', 'Creata'];
 
 var TZ = 'Europe/Rome';
 
@@ -64,14 +64,14 @@ function doPost(e) {
 
     sheet.appendRow([
       dataIta_(p.data), p.ora || '', p.persone || '',
-      p.nome || '', p.cognome || '', p.telefono || '', p.email || '',
+      p.nome || '', p.telefono || '', p.email || '',
       p.richieste || '', p.privacy || '', p.marketing || '',
       p.offerta || '', creataIta_()
     ]);
 
     // Notifica al ristorante (riepilogo completo)
     try {
-      var nomeCompleto = ((p.nome || '') + ' ' + (p.cognome || '')).trim();
+      var nomeCompleto = (p.nome || '').trim();
       var subj = '🍔 ' + (p.offerta ? p.offerta + ' — ' : '') + 'Nuova prenotazione — ' +
                  nomeCompleto + ' · ' + dataIta_(p.data) + ' ' + (p.ora || '') + ' · ' + (p.persone || '') + 'p';
       var html =
@@ -84,7 +84,6 @@ function doPost(e) {
             trEmail_('Orario', p.ora) +
             trEmail_('Coperti', p.persone) +
             trEmail_('Nome', p.nome) +
-            trEmail_('Cognome', p.cognome) +
             trEmail_('Telefono', p.telefono) +
             trEmail_('Email', p.email) +
             trEmail_('Richieste', p.richieste) +
@@ -159,7 +158,7 @@ function inviaConfermaCliente_(p) {
       r.split(RESTAURANT_INDIRIZZO).join(linkMaps).split('\n').join('<br>') + '</p>';
   }).join('');
 
-  var nomeCompleto = ((p.nome || '') + ' ' + (p.cognome || '')).trim();
+  var nomeCompleto = (p.nome || '').trim();
   var html =
     '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#111;line-height:1.55;max-width:520px">' +
       paragrafi +
