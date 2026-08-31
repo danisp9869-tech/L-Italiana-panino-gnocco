@@ -500,12 +500,8 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
           <select id="orario" required></select>
         </div>
         <div class="field">
-          <label for="nome">4 &middot; Nome</label>
-          <input type="text" id="nome" autocomplete="given-name" placeholder="Il tuo nome" required>
-        </div>
-        <div class="field">
-          <label for="cognome">Cognome</label>
-          <input type="text" id="cognome" autocomplete="family-name" placeholder="Il tuo cognome" required>
+          <label for="nome">4 &middot; Nome e cognome</label>
+          <input type="text" id="nome" autocomplete="name" placeholder="Nome e cognome" required>
         </div>
         <div class="field">
           <label for="telefono">Telefono</label>
@@ -670,7 +666,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     var $ = function (id) { return document.getElementById(id); };
     var dateEl=$("data"), btn=$("dataBtn"), cal=$("cal"),
         peopleEl=$("persone"), slotEl=$("orario"),
-        nomeEl=$("nome"), cognomeEl=$("cognome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
+        nomeEl=$("nome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
     if (!dateEl || !peopleEl || !slotEl || !btn || !cal) return;
 
     // URL dell'app Google Apps Script (/exec) che scrive la prenotazione sul foglio.
@@ -749,15 +745,16 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
     ctaEl.addEventListener("click",function(){
       if(!privacyEl.checked){ return; }
-      var nome=nomeEl.value.trim(), cognome=cognomeEl.value.trim();
-      if(!dateEl.value || !nome || !cognome || !telEl.value.trim()){ errEl.textContent="Servono data, nome, cognome e telefono per procedere."; return; }
+      var fullName=nomeEl.value.trim();
+      var _p=fullName.split(/\s+/), nome=_p.shift()||"", cognome=_p.join(" ");
+      if(!dateEl.value || !fullName || !telEl.value.trim()){ errEl.textContent="Servono nome e cognome, data e telefono per procedere."; return; }
       if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
       function mostraConferma(){
         if(window.fbq) fbq("track","Lead",{content_name:"Hamburger Montanaro 16,90\u20ac", value:16.90, currency:"EUR"});
         var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
         var em=$("email").value.trim(), ri=$("richieste").value.trim();
         var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
-        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nome+" "+cognome],["Telefono",telEl.value.trim()]];
+        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",fullName],["Telefono",telEl.value.trim()]];
         if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
         $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
         $("modulo").style.display="none"; $("conferma").style.display="block";
