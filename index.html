@@ -681,8 +681,21 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
     function slots(last){var out=[],h=19,m=0,lp=last.split(":"),lh=+lp[0],lm=+lp[1];while(h<lh||(h===lh&&m<=lm)){out.push((h<10?"0":"")+h+":"+(m<10?"0":"")+m);m+=30;if(m>=60){m=0;h++;}}return out;}
 
+    // Slot ancora prenotabili per una data: se e oggi, esclude gli orari gia passati.
+    function slotsDisponibili(d){
+      var cfg=ORARI[d.getDay()];
+      if(cfg===null) return [];
+      var out=slots(cfg.last);
+      var now=new Date();
+      if(sameDay(d,now)){
+        var adesso=now.getHours()*60+now.getMinutes();
+        out=out.filter(function(hh){var p=hh.split(":");return (+p[0])*60+(+p[1])>adesso;});
+      }
+      return out;
+    }
+
     var today=new Date(); today.setHours(0,0,0,0);
-    var start=new Date(today); while(ORARI[start.getDay()]===null){ start.setDate(start.getDate()+1); }
+    var start=new Date(today); while(slotsDisponibili(start).length===0){ start.setDate(start.getDate()+1); }
     var selected=null;
     var view=new Date(start.getFullYear(), start.getMonth(), 1);
 
@@ -692,10 +705,17 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     function riempiOrari(){
       slotEl.innerHTML=""; errEl.textContent="";
       if(!dateEl.value){ slotEl.disabled=true; return; }
-      var cfg=ORARI[parse(dateEl.value).getDay()];
-      if(cfg===null){ slotEl.disabled=true; return; }
+      var d=parse(dateEl.value);
+      var disp=slotsDisponibili(d);
+      if(disp.length===0){
+        var op=document.createElement("option"); op.value=""; 
+        op.textContent = ORARI[d.getDay()]===null ? "Chiuso" : "Nessun orario disponibile";
+        slotEl.appendChild(op); slotEl.disabled=true;
+        errEl.textContent = ORARI[d.getDay()]===null ? "Il "+GIORNI[d.getDay()]+" siamo chiusi: scegli un altro giorno." : "Per oggi non ci sono piu orari disponibili: scegli un altro giorno.";
+        return;
+      }
       slotEl.disabled=false;
-      slots(cfg.last).forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
+      disp.forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
     }
 
     function pick(d){
@@ -718,7 +738,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         var closed=ORARI[d.getDay()]===null;
         var past=d<today;
         var sel=selected&&sameDay(d,selected);
-        var dis=closed||past;
+        var dis=closed||past||slotsDisponibili(d).length===0;
         html+='<button type="button" class="day'+(sel?" sel":"")+'" data-d="'+iso(d)+'"'+(dis?" disabled":"")+'>'+g+'</button>';
       }
       html+='</div>';
