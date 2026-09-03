@@ -309,7 +309,7 @@
 
   /* Ottimizzazioni mobile — vincono sugli stili inline con !important */
   @media (max-width: 640px) {
-    .hero-section { min-height: calc(100vh - 64px) !important; min-height: calc(100dvh - 64px) !important; }
+    .hero-section { min-height: calc(100vh - 78px) !important; min-height: calc(100dvh - 78px) !important; }
     .site-header { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
     .site-name { font-size:19px !important; letter-spacing:0.10em !important; }
     .header-cta { font-size:13px !important; letter-spacing:0.10em !important; padding:10px 14px !important; white-space:nowrap !important; flex:0 0 auto; }
@@ -424,12 +424,10 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 45%, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.55) 55%, #0a0a0a 92%)"></div>
 
     <div style="position:relative; width:100%; max-width:1080px; text-align:center; animation:rise 0.7s ease both">
-      <div class="hero-badge" style="display:inline-flex; align-items:center; gap:12px; border:1px solid #ffb200; color:#ffb200; padding:8px 16px; border-radius:999px; font-size:12px; letter-spacing:0.28em; text-transform:uppercase; font-weight:600">Offerta valida fino a fine settembre</div>
 
       <h1 class="hero-title" style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; line-height:0.92; letter-spacing:-0.01em; margin:26px 0 0; font-size:clamp(52px, 7.4vw, 104px); text-wrap:balance">Il maxi burger che devi provare a settembre</h1>
-      <p style="font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#ffb200; font-size:clamp(25px, 3.2vw, 42px); line-height:1.05; margin:12px 0 0; text-shadow:0 2px 14px rgba(0,0,0,0.65)">Solo per settembre: il Montanaro a 16,90€</p>
 
-      <div style="max-width:720px; margin:24px auto 0; color:#ffffff"><span style="display:block; font-family:'Barlow Condensed', sans-serif; font-size:clamp(15px, 1.7vw, 19px); letter-spacing:0.22em; text-transform:uppercase; color:#ffb200; font-weight:700; margin-bottom:8px">Promo valida solo online</span><span style="display:block; font-size:clamp(16px, 1.9vw, 21px); font-weight:700; line-height:1.4">Maxi Montanaro + patate rustiche + gnocco fritto con lardo alle erbe</span><span style="display:flex; align-items:baseline; justify-content:center; gap:14px; margin-top:10px; flex-wrap:wrap"><s style="font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:clamp(26px, 3.2vw, 40px); color:#ffffff; text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.08em">23&nbsp;€</s><span style="font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:clamp(42px, 5.6vw, 72px); line-height:0.9; color:#ffb200; text-shadow:0 2px 14px rgba(0,0,0,0.6)">16,90&nbsp;€</span></span></div>
+      <div style="max-width:720px; margin:24px auto 0; color:#ffffff"><span style="display:block; font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#ffb200; font-size:clamp(21px, 2.7vw, 34px); line-height:1.15; margin-bottom:12px; text-shadow:0 2px 14px rgba(0,0,0,0.65)">Offerta valida online fino a fine settembre:</span><span style="display:block; font-size:clamp(18px, 2.2vw, 26px); font-weight:700; line-height:1.4">Maxi Montanaro + patate rustiche + gnocco fritto con lardo alle erbe a solo</span><span style="display:flex; align-items:baseline; justify-content:center; gap:14px; margin-top:10px; flex-wrap:wrap"><s style="font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:clamp(26px, 3.2vw, 40px); color:#ffffff; text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.08em">23&nbsp;€</s><span style="font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:clamp(42px, 5.6vw, 72px); line-height:0.9; color:#ffb200; text-shadow:0 2px 14px rgba(0,0,0,0.6)">16,90&nbsp;€</span></span></div>
 
       <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:36px">
         <a href="#prenota" style="font-family:'Barlow Condensed', sans-serif; font-size:19px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; background:#ffb200; color:#0a0a0a; padding:18px 38px; border-radius:12px; min-height:56px; display:inline-flex; align-items:center; text-align:center">Prenota ora e prendi l'offerta</a>
@@ -465,10 +463,6 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         <div class="field">
           <label for="telefono">Telefono</label>
           <input type="tel" id="telefono" autocomplete="tel" placeholder="Es. 333 1234567" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" autocomplete="email" placeholder="La tua email">
         </div>
         <div class="field">
           <label for="richieste">Richieste particolari <span class="opt">(facoltativo)</span></label>
@@ -752,10 +746,10 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       function mostraConferma(){
         if(window.fbq) fbq("track","Lead",{content_name:"Hamburger Montanaro 16,90\u20ac", value:16.90, currency:"EUR"});
         var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
-        var em=$("email").value.trim(), ri=$("richieste").value.trim();
+        var ri=$("richieste").value.trim();
         var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
         var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nome],["Telefono",telEl.value.trim()]];
-        if(em) rows.push(["Email",em]); if(ri) rows.push(["Note",ri]);
+        if(ri) rows.push(["Note",ri]);
         $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
         $("modulo").style.display="none"; $("conferma").style.display="block";
         window.scrollTo({top: document.getElementById("prenota").getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
@@ -765,7 +759,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       var body=new URLSearchParams({
         data:dateEl.value, ora:slotEl.value, persone:peopleEl.value,
         nome:nome, telefono:telEl.value.trim(),
-        email:$("email").value.trim(), richieste:$("richieste").value.trim(),
+        richieste:$("richieste").value.trim(),
         privacy:(privacyEl.checked?"S\u00ec":"No"), marketing:($("marketing").checked?"S\u00ec":"No"),
         offerta:"Hamburger Montanaro 16,90\u20ac"
       });
@@ -775,7 +769,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     });
     $("reBook").addEventListener("click", function(){
       $("conferma").style.display="none"; $("modulo").style.display="block";
-      nomeEl.value=""; telEl.value=""; $("email").value=""; $("richieste").value="";
+      nomeEl.value=""; telEl.value=""; $("richieste").value="";
       privacyEl.checked=false; ctaEl.disabled=true; errEl.textContent="";
       var target=document.getElementById("prenota");
       window.scrollTo({top: target.getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
