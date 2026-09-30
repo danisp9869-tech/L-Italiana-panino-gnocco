@@ -396,6 +396,10 @@
 
 .book-title.promo-title .promo-old { color:#ffffff; font-size:0.72em; text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.08em; margin-right:0.14em; }
 .book-title.promo-title .promo-new { white-space:nowrap; }
+
+.promo-sub { max-width:640px; margin:14px auto 0; color:#c8c8c8; font-size:clamp(13.5px, 1.5vw, 15.5px); line-height:1.55; text-align:center; }
+.conf-valid { text-align:center; margin:10px 0 0; color:#555; font-size:14px; line-height:1.5; font-weight:700; }
+.conf-disdetta { text-align:center; margin:18px 0 0; color:var(--ink-soft); font-size:13.5px; line-height:1.6; }
 </style>
 
 <!-- Meta Pixel Code -->
@@ -448,56 +452,15 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
       <div class="book-head">
         <span class="kicker">Promo valida solo online</span>
         <h2 class="book-title promo-title">Prenota e ottieni il tuo <span class="hl">coupon riservato</span>: <span class="hl">Maxi Montanaro</span>, <span class="hl">patate rustiche</span> e uno <span class="hl">gnocco fritto con lardo alle erbe</span> a <s class="promo-old">30&nbsp;&euro;</s><span class="hl promo-new">16,90&nbsp;&euro;</span></h2>
-        <span class="book-badge"><span class="dot"></span>Fino a fine settembre</span>
+        <p class="promo-sub">Compilando il form prenoterai un tavolo a tuo nome. Il coupon sar&agrave; valido solamente nella data di prenotazione inserita e ogni persona avr&agrave; diritto a un coupon dell'offerta.</p><span class="book-badge"><span class="dot"></span>Fino a fine settembre</span>
       </div>
-      <div class="book" id="modulo" aria-label="Prenota il tavolo">
-        <div class="field" style="position:relative">
-          <label>1 &middot; Data</label>
-          <button type="button" id="dataBtn" class="datepick placeholder">Scegli la data</button>
-          <input type="hidden" id="data">
-          <div id="cal" class="cal" hidden></div>
-        </div>
-        <div class="field">
-          <label for="persone">2 &middot; Quante persone</label>
-          <select id="persone" required></select>
-        </div>
-        <div class="field">
-          <label for="orario">3 &middot; Orario</label>
-          <select id="orario" required></select>
-        </div>
-        <div class="field">
-          <label for="nome">4 &middot; Nome e cognome</label>
-          <input type="text" id="nome" autocomplete="name" placeholder="Nome e cognome" required>
-        </div>
-        <div class="field">
-          <label for="telefono">Telefono</label>
-          <input type="tel" id="telefono" autocomplete="tel" placeholder="Es. 333 1234567" required>
-        </div>
-        <div class="field">
-          <label for="richieste">Richieste particolari <span class="opt">(facoltativo)</span></label>
-          <input type="text" id="richieste" placeholder="Allergie, seggiolone, tavolo esterno…">
-        </div>
-        <label class="privacy" for="privacy">
-          <input type="checkbox" id="privacy">
-          <span>Ho letto e accetto la <a href="https://www.iubenda.com/privacy-policy/54561529" class="iubenda-noiframe iubenda-embed" title="Privacy Policy" style="color:#a67c00; text-decoration:underline; font-weight:700">privacy policy</a> per la gestione della prenotazione.</span>
-        </label>
-        <label class="privacy optional" for="marketing">
-          <input type="checkbox" id="marketing">
-          <span>Desidero ricevere offerte e novit&agrave; da L'Italiana via email. Facoltativo, posso disiscrivermi quando voglio.</span>
-        </label>
-        <div class="coupon-form">Pochi coupon rimasti</div><button type="button" class="book-cta" id="cta" disabled>Prenota e riserva il coupon</button>
-        <div class="err" id="err"></div>
-      </div>
-      <div class="book" id="conferma" style="display:none">
-        <div class="conf-title">Prenotazione confermata</div>
-        <p class="conf-text">Ti aspettiamo da <b>Ristorante L'Italiana</b>.</p>
-        <p class="conf-gnocco">🎉 Ti aspetta uno gnocco fritto in omaggio</p>
-        <div class="conf-recap" id="recap"></div>
-        <p class="conf-nota">Se non dovessi riuscire a venire, avvisaci in anticipo al <a href="tel:+390173216770">0173 216770</a>.</p>
-        <div style="text-align:center; margin-top:18px">
-          <button type="button" id="reBook" class="rebook-link">Prenota di nuovo</button>
-        </div>
-      </div>
+      <iframe
+        id="dinevo-booking"
+        src="https://api.dinevo.it/embed/r/est_d9a7fbba-a336-4a28-88b7-3a0c8fa4565e?promotion=promo_679c83f6-d427-4bd4-9f33-6d7a569d0bbb"
+        title="Prenota un tavolo"
+        height="900"
+        style="width: 100%; border: 0; border-radius: 22px; overflow: hidden"
+      ></iframe>
     </div>
   </section>
   <section style="padding:88px 24px; border-top:1px solid #1f1f1f">
@@ -666,144 +629,25 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
   </footer>
 </div>
 <script>
-(function () {
-    var $ = function (id) { return document.getElementById(id); };
-    var dateEl=$("data"), btn=$("dataBtn"), cal=$("cal"),
-        peopleEl=$("persone"), slotEl=$("orario"),
-        nomeEl=$("nome"), telEl=$("telefono"), privacyEl=$("privacy"), ctaEl=$("cta"), errEl=$("err");
-    if (!dateEl || !peopleEl || !slotEl || !btn || !cal) return;
-
-    // URL dell'app Google Apps Script (/exec) che scrive la prenotazione sul foglio.
-    // Incolla qui l'URL dopo aver pubblicato lo script (Distribuisci -> App web).
-    // Lasciandolo "" il form mostra comunque la conferma ma non scrive sul foglio.
-    var SHEET_URL = "https://script.google.com/macros/s/AKfycbzssQxU6TGht26SbcLz__nPSZyqAmpLcdRpQdPoIU7V7p9mkZQ4QOTtC55sU6iiITVI/exec";
-
-    var ORARI = { 0:{last:"22:30"}, 1:null, 2:{last:"22:30"}, 3:{last:"22:30"}, 4:{last:"22:30"}, 5:{last:"22:30"}, 6:{last:"23:00"} };
-    var GIORNI = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
-    var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-    var DOW = ["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
-
-    function iso(d){var m=d.getMonth()+1,g=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(g<10?"0":"")+g;}
-    function parse(v){var p=v.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
-    function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-    function slots(last){var out=[],h=19,m=0,lp=last.split(":"),lh=+lp[0],lm=+lp[1];while(h<lh||(h===lh&&m<=lm)){out.push((h<10?"0":"")+h+":"+(m<10?"0":"")+m);m+=30;if(m>=60){m=0;h++;}}return out;}
-
-    // Slot ancora prenotabili per una data: se e oggi, esclude gli orari gia passati.
-    function slotsDisponibili(d){
-      var cfg=ORARI[d.getDay()];
-      if(cfg===null) return [];
-      var out=slots(cfg.last);
-      var now=new Date();
-      if(sameDay(d,now)){
-        var adesso=now.getHours()*60+now.getMinutes();
-        out=out.filter(function(hh){var p=hh.split(":");return (+p[0])*60+(+p[1])>adesso;});
-      }
-      return out;
-    }
-
-    var today=new Date(); today.setHours(0,0,0,0);
-    var start=new Date(today); while(slotsDisponibili(start).length===0){ start.setDate(start.getDate()+1); }
-    var selected=null;
-    var view=new Date(start.getFullYear(), start.getMonth(), 1);
-
-    for(var n=1;n<=20;n++){var o=document.createElement("option");o.value=n;o.textContent=n+(n===1?" persona":" persone");peopleEl.appendChild(o);}
-    peopleEl.value="2";
-
-    function riempiOrari(){
-      slotEl.innerHTML=""; errEl.textContent="";
-      if(!dateEl.value){ slotEl.disabled=true; return; }
-      var d=parse(dateEl.value);
-      var disp=slotsDisponibili(d);
-      if(disp.length===0){
-        var op=document.createElement("option"); op.value=""; 
-        op.textContent = ORARI[d.getDay()]===null ? "Chiuso" : "Nessun orario disponibile";
-        slotEl.appendChild(op); slotEl.disabled=true;
-        errEl.textContent = ORARI[d.getDay()]===null ? "Il "+GIORNI[d.getDay()]+" siamo chiusi: scegli un altro giorno." : "Per oggi non ci sono piu orari disponibili: scegli un altro giorno.";
-        return;
-      }
-      slotEl.disabled=false;
-      disp.forEach(function(hh){var o=document.createElement("option");o.value=hh;o.textContent=hh;slotEl.appendChild(o);});
-    }
-
-    function pick(d){
-      selected=d; dateEl.value=iso(d);
-      btn.textContent=("0"+d.getDate()).slice(-2)+" "+MESI[d.getMonth()]+" "+d.getFullYear();
-      btn.classList.remove("placeholder");
-      cal.hidden=true; riempiOrari();
-    }
-
-    function render(){
-      var y=view.getFullYear(), m=view.getMonth();
-      var atMin = (y<today.getFullYear())||(y===today.getFullYear()&&m<=today.getMonth());
-      var html='<div class="cal-head"><button type="button" id="calPrev"'+(atMin?" disabled":"")+'>‹</button><span>'+MESI[m]+" "+y+'</span><button type="button" id="calNext">›</button></div><div class="cal-grid">';
-      for(var i=0;i<7;i++){ html+='<div class="dow">'+DOW[i]+'</div>'; }
-      var first=new Date(y,m,1); var off=(first.getDay()+6)%7;
-      for(var e=0;e<off;e++){ html+='<div class="empty"></div>'; }
-      var last=new Date(y,m+1,0).getDate();
-      for(var g=1; g<=last; g++){
-        var d=new Date(y,m,g);
-        var closed=ORARI[d.getDay()]===null;
-        var past=d<today;
-        var sel=selected&&sameDay(d,selected);
-        var dis=closed||past||slotsDisponibili(d).length===0;
-        html+='<button type="button" class="day'+(sel?" sel":"")+'" data-d="'+iso(d)+'"'+(dis?" disabled":"")+'>'+g+'</button>';
-      }
-      html+='</div>';
-      cal.innerHTML=html;
-      var p=$("calPrev"), nx=$("calNext");
-      if(p) p.addEventListener("click",function(ev){ev.stopPropagation(); view=new Date(y,m-1,1); render();});
-      if(nx) nx.addEventListener("click",function(ev){ev.stopPropagation(); view=new Date(y,m+1,1); render();});
-      cal.querySelectorAll("button.day:not(:disabled)").forEach(function(b){
-        b.addEventListener("click",function(ev){ ev.stopPropagation(); pick(parse(b.getAttribute("data-d"))); });
-      });
-    }
-
-    btn.addEventListener("click",function(ev){ ev.stopPropagation(); if(cal.hidden){ if(selected){view=new Date(selected.getFullYear(),selected.getMonth(),1);} render(); cal.hidden=false; } else { cal.hidden=true; } });
-    document.addEventListener("click",function(ev){ if(cal.hidden) return; if(!cal.contains(ev.target) && ev.target!==btn){ cal.hidden=true; } });
-
-    pick(start); // data di default: primo giorno aperto
-
-    document.querySelectorAll('a[href="#prenota"]').forEach(function(a){
-      a.addEventListener("click", function(){ if(window.fbq) fbq("track","InitiateCheckout"); });
+  // L'altezza del form Dinevo cambia con lo step: il widget la comunica alla
+  // pagina e l'iframe si adatta, senza scrollbar interne.
+  window.addEventListener('message', function (event) {
+    if (!event.data || event.data.type !== 'dinevo:booking-height') return;
+    var frame = document.getElementById('dinevo-booking');
+    if (!frame) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) frame.style.transition = 'height 0.2s ease';
+    frame.style.height = event.data.height + 'px';
+  });
+  // Conversione Meta: prenotazione confermata dentro il widget.
+  if (typeof window.fbq === 'function') {
+    window.addEventListener('message', function (event) {
+      if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
+      var frame = document.getElementById('dinevo-booking');
+      if (!frame || event.source !== frame.contentWindow) return;
+      window.fbq('track', 'Purchase', { value: 0, currency: 'EUR' });
     });
-    privacyEl.addEventListener("change",function(){ ctaEl.disabled=!privacyEl.checked; });
-    ctaEl.addEventListener("click",function(){
-      if(!privacyEl.checked){ return; }
-      var nome=nomeEl.value.trim();
-      if(!dateEl.value || !nome || !telEl.value.trim()){ errEl.textContent="Servono nome e cognome, data e telefono per procedere."; return; }
-      if(!slotEl.value){ errEl.textContent="Scegli un orario disponibile."; return; }
-      function mostraConferma(){
-        if(window.fbq) fbq("track","Lead",{content_name:"Hamburger Montanaro 16,90\u20ac", value:16.90, currency:"EUR"});
-        var esc=function(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;};
-        var ri=$("richieste").value.trim();
-        var pers=peopleEl.value+(peopleEl.value==="1"?" persona":" persone");
-        var rows=[["Data",btn.textContent],["Persone",pers],["Orario",slotEl.value],["Nome",nome],["Telefono",telEl.value.trim()]];
-        if(ri) rows.push(["Note",ri]);
-        $("recap").innerHTML=rows.map(function(r){return '<div class="rr"><span>'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';}).join("");
-        $("modulo").style.display="none"; $("conferma").style.display="block";
-        window.scrollTo({top: document.getElementById("prenota").getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
-      }
-      if(!SHEET_URL){ mostraConferma(); return; }
-      var _t=ctaEl.textContent; ctaEl.disabled=true; ctaEl.textContent="Invio in corso\u2026";
-      var body=new URLSearchParams({
-        data:dateEl.value, ora:slotEl.value, persone:peopleEl.value,
-        nome:nome, telefono:telEl.value.trim(),
-        richieste:$("richieste").value.trim(),
-        privacy:(privacyEl.checked?"S\u00ec":"No"), marketing:($("marketing").checked?"S\u00ec":"No"),
-        offerta:"Hamburger Montanaro 16,90\u20ac"
-      });
-      fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:body})
-        .then(function(){ mostraConferma(); })
-        .catch(function(){ ctaEl.disabled=false; ctaEl.textContent=_t; errEl.textContent="Connessione assente. Chiamaci per confermare: 0173 216770"; });
-    });
-    $("reBook").addEventListener("click", function(){
-      $("conferma").style.display="none"; $("modulo").style.display="block";
-      nomeEl.value=""; telEl.value=""; $("richieste").value="";
-      privacyEl.checked=false; ctaEl.disabled=true; errEl.textContent="";
-      var target=document.getElementById("prenota");
-      window.scrollTo({top: target.getBoundingClientRect().top+window.scrollY-80, behavior:"smooth"});
-    });
-  })();
+  }
 </script>
 
 <!-- Iubenda — cookie/consent widget -->
