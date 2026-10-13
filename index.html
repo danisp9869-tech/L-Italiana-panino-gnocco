@@ -644,14 +644,13 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     frame.style.height = event.data.height + 'px';
   });
   // Conversione Meta: prenotazione confermata dentro il widget.
-  if (typeof window.fbq === 'function') {
-    window.addEventListener('message', function (event) {
-      if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
-      var frame = document.getElementById('dinevo-booking');
-      if (!frame || event.source !== frame.contentWindow) return;
-      window.fbq('track', 'Purchase', { value: 0, currency: 'EUR' });
-    });
-  }
+  window.addEventListener('message', function (event) {
+    if (!event.data || event.data.type !== 'dinevo:booking-confirmed') return;
+    if (typeof window.fbq !== 'function') return;
+    var frame = document.getElementById('dinevo-booking');
+    if (!frame || event.source !== frame.contentWindow) return;
+    window.fbq('track', 'Schedule');
+  });
 </script>
 
 </body></html>
