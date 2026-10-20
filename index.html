@@ -645,6 +645,8 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     if (typeof window.fbq !== 'function') return;
     var frame = document.getElementById('dinevo-booking');
     if (!frame || event.source !== frame.contentWindow) return;
+    // la campagna Meta ottimizza su "Contatti" (Contact): va inviato a ogni prenotazione confermata
+    window.fbq('track', 'Contact');
     window.fbq('track', 'Schedule');
   });
 </script>
