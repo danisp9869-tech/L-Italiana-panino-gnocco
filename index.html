@@ -413,6 +413,9 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+// niente eventi "indovinati" da Meta sui clic dei bottoni: le conversioni le
+// decide solo questo codice (un clic su "Prenota" non è una prenotazione)
+fbq('set', 'autoConfig', false, '1511186831035166');
 fbq('init', '1511186831035166');
 fbq('track', 'PageView');
 </script>
@@ -645,9 +648,13 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
     if (typeof window.fbq !== 'function') return;
     var frame = document.getElementById('dinevo-booking');
     if (!frame || event.source !== frame.contentWindow) return;
-    // la campagna Meta ottimizza su "Contatti" (Contact): va inviato a ogni prenotazione confermata
-    window.fbq('track', 'Contact');
-    window.fbq('track', 'Schedule');
+    // Prenotazione confermata: è l'unico momento in cui parte una conversione.
+    // La campagna ottimizza su Lead; Contact e Schedule restano per lo storico.
+    // Lo stesso eventID permette a Meta di scartare i doppioni browser/server.
+    var id = 'pren-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+    window.fbq('track', 'Lead', {}, { eventID: id });
+    window.fbq('track', 'Contact', {}, { eventID: id });
+    window.fbq('track', 'Schedule', {}, { eventID: id });
   });
 </script>
 
