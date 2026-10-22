@@ -34,6 +34,20 @@
   .dati a { color:var(--ink); }
   .dati .riga b.todo { color:#ff8a8a; font-weight:600; }
   .nota { color:#8a8a8a; font-size:13px; margin-top:26px; text-align:center; }
+
+/* ---- BANNER COOKIE (iubenda) ----
+   Il banner arriva dal pannello iubenda e di suo, con questo testo lungo,
+   riempie tutto lo schermo del telefono. Qui lo si tiene dentro una card:
+   larghezza massima, altezza massima con scorrimento interno, e un margine
+   che lascia intravedere la pagina sotto. I pulsanti NON si toccano: "Rifiuta"
+   deve restare visibile e grande quanto "Accetta". */
+#iubenda-cs-banner .iubenda-cs-container{max-width:460px;margin:12px auto}
+#iubenda-cs-banner .iubenda-cs-content{border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.45)}
+#iubenda-cs-banner .iubenda-banner-content{max-height:46vh;overflow-y:auto;font-size:13.5px;line-height:1.45}
+@media (max-width:600px){
+  #iubenda-cs-banner .iubenda-cs-container{max-width:none;margin:10px}
+  #iubenda-cs-banner .iubenda-banner-content{max-height:38vh}
+}
 </style>
 </head>
 <body>
