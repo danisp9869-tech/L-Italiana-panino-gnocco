@@ -78,7 +78,7 @@
     padding: 48px 44px;
     box-shadow: 0 0 0 1px rgba(255, 45, 63, 0.12), 0 24px 60px rgba(0, 0, 0, 0.5);
     text-align: center;
-  }.offer-box ul{ margin-left: auto; margin-right: auto; }.offer-box .price-row{ justify-content: center; }.offer-box .offer-title{ text-align: center; }.ingredienti{ display: flex !important; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; max-width: 620px !important; margin-left: auto !important; margin-right: auto !important; }.ingredienti li{ display: inline-flex; align-items: center; font-size: clamp(13px, 1.4vw, 16px) !important; }.ingredienti li:not(:last-child)::after{ content: "·"; color: #978a84; font-weight: 700; margin: 0 4px; }.offer-img{ height: 480px !important; object-fit: cover !important; object-position: center; }.offer-cta{ display: flex !important; width: fit-content; margin-left: auto; margin-right: auto; justify-content: center; padding-top: 12px !important; padding-bottom: 12px !important; min-height: 0 !important; }.offer-box::before{
+  }.offer-box ul{ margin-left: auto; margin-right: auto; }.offer-box .price-row{ justify-content: center; }.offer-box .offer-title{ text-align: center; }.ingredienti{ display: flex !important; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; max-width: 620px !important; margin-left: auto !important; margin-right: auto !important; }.ingredienti li{ display: inline-flex; align-items: center; font-size: clamp(18px, 1.9vw, 22px) !important; }.ingredienti li:not(:last-child)::after{ content: "·"; color: #978a84; font-weight: 700; margin: 0 4px; }.offer-img{ height: 480px !important; object-fit: cover !important; object-position: center; }.offer-cta{ display: flex !important; width: fit-content; margin-left: auto; margin-right: auto; justify-content: center; padding-top: 12px !important; padding-bottom: 12px !important; min-height: 0 !important; }.offer-box::before{
     content: "";
     position: absolute;
     inset: 0;
@@ -100,7 +100,7 @@
   }/* Form prenotazione — layout landing bombette, accento giallo */
   .book-head{ text-align:center; margin-bottom:26px; }.kicker{ color:#ff2d3f; font-family:'Cormorant Garamond', Georgia, serif; font-size:14px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; }.book-title{ font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; font-size:clamp(34px, 4.6vw, 60px); line-height:0.98; margin:6px 0 0; color:#ffffff; }.book-badge{ display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:7px 15px; border:1px solid #ff2d3f; border-radius:999px; color:#ff2d3f; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }.book-badge .dot{ width:7px; height:7px; border-radius:50%; background:#ff2d3f; }.book .conf-recap .rr{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:12px 14px; border-top:1px solid var(--bordo); }.book .conf-recap .rr:first-child{ border-top:none; }.book .conf-recap .rr span{ color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; font-size:11px; font-weight:700; flex:0 0 auto; }.book .conf-recap .rr b{ color:var(--ink); font-size:15px; text-align:right; }/* Blocco promo sopra il form */
   .book-title.promo-title{ font-size:clamp(25px, 3.1vw, 42px); line-height:1.1; max-width:780px; margin-left:auto; margin-right:auto; text-wrap:balance; }.book-title.promo-title .hl{ color:#ff2d3f; }.scarsita-hero{ margin-top:22px; font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:#ff2d3f; font-size:clamp(17px, 1.9vw, 24px); line-height:1.05; text-shadow:0 2px 14px rgba(0,0,0,0.65); }
-@media (max-width: 640px) {.scarsita-hero{ font-size:18px; margin-top:18px; } }.book-title.promo-title .promo-old{ color:#ffffff; font-size:0.72em; text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.08em; margin-right:0.14em; }.book-title.promo-title .promo-new{ white-space:nowrap; }.promo-sub{ max-width:640px; margin:14px auto 0; color:#d2c6bf; font-size:clamp(13.5px, 1.5vw, 15.5px); line-height:1.55; text-align:center; }
+@media (max-width: 640px) {.scarsita-hero{ font-size:18px; margin-top:18px; }.galleria-carne{ grid-template-columns:1fr 1fr !important; gap:10px !important; } }.book-title.promo-title .promo-old{ color:#ffffff; font-size:0.72em; text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.08em; margin-right:0.14em; }.book-title.promo-title .promo-new{ white-space:nowrap; }.promo-sub{ max-width:640px; margin:14px auto 0; color:#d2c6bf; font-size:clamp(13.5px, 1.5vw, 15.5px); line-height:1.55; text-align:center; }
 </style>
 
 <!-- Iubenda — cookie/consent widget -->
@@ -148,11 +148,12 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
 
     <div style="position:relative; width:100%; max-width:1080px; text-align:center; animation:rise 0.7s ease both">
 
-      <div class="hero-badge" style="display:inline-flex; align-items:center; gap:12px; border:1px solid #f2c21a; color:#f2c21a; padding:8px 18px; border-radius:999px; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; font-weight:700; margin-bottom:26px">Via Roma 45, Piobesi d'Alba (CN)</div>
-      <h1 class="hero-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:600; line-height:0.98; letter-spacing:0.005em; margin:0; font-size:clamp(54px, 8.4vw, 128px); color:#ffffff; text-shadow:0 2px 24px rgba(0,0,0,0.75)">Miguel Vergara</h1>
+      <div class="hero-badge" style="display:inline-flex; align-items:center; gap:12px; border:1px solid #f2c21a; color:#f2c21a; padding:8px 18px; border-radius:999px; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; font-weight:700; margin-bottom:26px">Per i veri amanti della carne</div>
+      <h1 class="hero-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:600; line-height:0.98; letter-spacing:0.005em; margin:0; font-size:clamp(54px, 8.4vw, 128px); color:#ffffff; text-shadow:0 2px 24px rgba(0,0,0,0.75)">Una delle carni pi&ugrave; tenere al mondo</h1>
       <div class="hero-kicker" style="margin-top:14px; font-family:'Cormorant Garamond', Georgia, serif; font-weight:600; text-transform:uppercase; letter-spacing:0.34em; color:#f2c21a; font-size:clamp(15px, 1.9vw, 26px); text-shadow:0 1px 3px rgba(0,0,0,0.95), 0 2px 18px rgba(0,0,0,0.9)">Selezione premium</div>
 
-      <p class="hero-sub" style="max-width:640px; margin:26px auto 0; font-family:'Cormorant Garamond', Georgia, serif; font-weight:400; color:rgba(255,255,255,0.92); font-size:clamp(21px, 2.5vw, 32px); line-height:1.35; text-shadow:0 2px 14px rgba(0,0,0,0.75)">Tagliata di una delle carni pi&ugrave; tenere al mondo, provala da Ristorante L'Italiana</p>
+      <p class="hero-sub" style="max-width:640px; margin:26px auto 0; font-family:'Cormorant Garamond', Georgia, serif; font-weight:400; color:rgba(255,255,255,0.92); font-size:clamp(21px, 2.5vw, 32px); line-height:1.35; text-shadow:0 2px 14px rgba(0,0,0,0.75)">Direttamente dalla Spagna in esclusiva: tagliata di scamone Miguel Vergara millefoglie di patate</p>
+      <div class="hero-prezzo" style="display:flex; align-items:baseline; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:14px; font-weight:700; line-height:0.9"><s style="color:#ffffff; font-size:clamp(26px, 3.2vw, 42px); text-decoration-line:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.07em; text-shadow:0 2px 12px rgba(0,0,0,0.8)">30&nbsp;&euro;</s><span style="color:#f2c21a; font-size:clamp(48px, 6.4vw, 86px); white-space:nowrap; text-shadow:0 2px 16px rgba(0,0,0,0.8)">19,90&nbsp;&euro;</span></div>
 
       <div style="margin-top:38px">
         <a href="#prenota" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(13px, 3.5vw, 17px); font-weight:700; letter-spacing:0.07em; text-transform:uppercase; white-space:nowrap; background:#e8111e; color:#ffffff; padding:11px clamp(16px, 3vw, 24px); border-radius:10px; display:inline-flex; align-items:center">Prenota un tavolo</a>
@@ -165,13 +166,13 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         <div class="offer-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#978a84; font-size:clamp(18px, 2vw, 24px); line-height:1">Prezzo speciale online</div>
         <h2 class="offer-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; line-height:0.86; letter-spacing:-0.01em; margin:8px 0 0; font-size:clamp(32px, 4.4vw, 60px)">Tagliata di scamone<br><span style="color:#f2c21a">Miguel Vergara</span></h2>
         <ul class="ingredienti" style="list-style:none; margin:26px 0 0; padding:0; display:grid; gap:8px; max-width:480px">
-          <li style="font-size:clamp(15px, 1.5vw, 17px); color:#f3ece8; line-height:1.4">Tagliata di scamone Miguel Vergara</li>
-          <li style="font-size:clamp(15px, 1.5vw, 17px); color:#f3ece8; line-height:1.4">Millefoglie di patata e besciamella</li>
-          <li style="font-size:clamp(15px, 1.5vw, 17px); color:#f3ece8; line-height:1.4">Misticanza dell'orto</li>
+          <li style="font-size:clamp(18px, 1.9vw, 22px); color:#f3ece8; line-height:1.45">Tagliata di scamone Miguel Vergara</li>
+          <li style="font-size:clamp(18px, 1.9vw, 22px); color:#f3ece8; line-height:1.45">Millefoglie di patata e besciamella</li>
+          <li style="font-size:clamp(18px, 1.9vw, 22px); color:#f3ece8; line-height:1.45">Misticanza dell'orto</li>
         </ul>
         <div class="price-row" style="display:flex; align-items:baseline; gap:18px; margin-top:34px; flex-wrap:wrap">
-          <span style="font-size:clamp(15px, 1.7vw, 18px); color:#c2b4ad">A soli</span>
-          <span style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; color:#f2c21a; font-size:clamp(62px, 9vw, 112px); line-height:0.85">19,90€</span>
+          <span style="font-size:clamp(19px, 2.1vw, 24px); color:#c2b4ad">A soli</span>
+          <span style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; color:#ffffff; font-size:clamp(30px, 4.2vw, 52px); line-height:0.85; text-decoration:line-through; text-decoration-color:#ffffff; text-decoration-thickness:0.06em">30&nbsp;€</span><span style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; color:#f2c21a; font-size:clamp(62px, 9vw, 112px); line-height:0.85">19,90€</span>
         </div>
         <div style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; letter-spacing:0.16em; color:#e8111e; font-size:clamp(13px, 1.4vw, 15px); margin-top:12px">Fino al 15 di novembre — offerta limitata</div>
         <a href="#prenota" class="offer-cta" style="margin-top:32px; font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(14px, 3.8vw, 18px); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; background:#e8111e; color:#ffffff; padding:12px clamp(13px, 3vw, 18px); border-radius:12px; min-height:0; display:inline-flex; align-items:center">Prenota un tavolo</a>
@@ -205,6 +206,12 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         <h2 style="font-family:'Cormorant Garamond', Georgia, serif; font-weight:700; text-transform:uppercase; font-size:clamp(34px, 4.6vw, 60px); line-height:1; margin:10px 0 0">Chi &egrave; <span style="color:#ff2d3f">Miguel Vergara</span></h2>
       </div>
       <p style="max-width:760px; margin:0 auto 44px; text-align:center; color:#d2c6bf; font-size:18px; line-height:1.65; text-wrap:pretty">Grupo Miguel Vergara &egrave; un'azienda spagnola a conduzione familiare che produce carne bovina premium controllando tutta la filiera, dall'allevamento alla tavola. Nasce negli anni Sessanta e prende la forma attuale nel 1993 a Valladolid: oggi &egrave; uno dei nomi pi&ugrave; riconosciuti d'Europa quando si parla di carne di qualit&agrave;.</p>
+      <div class="galleria-carne" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap:12px; margin:0 auto 44px; max-width:1180px">
+        <img src="carne-1.jpg" alt="Tagli di scamone con marezzatura evidente" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border:1px solid #3a2727; border-radius:12px">
+        <img src="carne-2.jpg" alt="Due tagli di carne Miguel Vergara visti di taglio" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border:1px solid #3a2727; border-radius:12px">
+        <img src="carne-3.jpg" alt="Fette di carne con fitta marezzatura" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border:1px solid #3a2727; border-radius:12px">
+        <img src="carne-4.jpg" alt="Costata con osso e grasso di copertura" loading="lazy" decoding="async" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border:1px solid #3a2727; border-radius:12px">
+      </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap:1px; background:#2e2020; border:1px solid #2e2020; border-radius:16px; overflow:hidden">
         <div style="background:#100c0c; padding:34px 28px 40px">
           <div style="font-family:'Cormorant Garamond', Georgia, serif; font-size:48px; font-weight:700; color:#ff2d3f; line-height:1">01</div>
@@ -233,6 +240,7 @@ src="https://www.facebook.com/tr?id=1511186831035166&ev=PageView&noscript=1"
         </div>
       </div>
       <div style="text-align:center; margin-top:44px">
+        <p style="max-width:760px; margin:0 auto 22px; color:#ffffff; font-weight:600; font-size:clamp(25px, 3.1vw, 38px); line-height:1.3">Prova la tagliata di una delle carni migliori al mondo a <span style="color:#f2c21a; font-weight:700; white-space:nowrap; font-size:1.25em">19,90&nbsp;&euro;</span></p>
         <a href="#prenota" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(15px, 4.1vw, 24px); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; background:#e8111e; color:#ffffff; padding:14px clamp(16px, 3.4vw, 26px); border-radius:12px; display:inline-flex; align-items:center; text-align:center">Prenota un tavolo</a>
       </div>
     </div>
