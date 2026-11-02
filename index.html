@@ -399,6 +399,87 @@
 .promo-sub { max-width:640px; margin:14px auto 0; color:#c8c8c8; font-size:clamp(13.5px, 1.5vw, 15.5px); line-height:1.55; text-align:center; }
 .conf-valid { text-align:center; margin:10px 0 0; color:#555; font-size:14px; line-height:1.5; font-weight:700; }
 .conf-disdetta { text-align:center; margin:18px 0 0; color:var(--ink-soft); font-size:13.5px; line-height:1.6; }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     Banner cookie iubenda — solo aspetto, il meccanismo del consenso resta
+     intatto. Di serie il banner occupa tutto lo schermo del telefono: si
+     legge il testo legale prima ancora di vedere l'offerta. Qui diventa una
+     scheda in basso, con l'hero visibile dietro.
+     I due pulsanti restano identici per dimensione, corpo e peso visivo,
+     come richiede il GDPR: cambia solo la palette, dal blu ai colori della
+     landing.
+     Il foglio di stile di iubenda viene iniettato a runtime, quindi dopo
+     questo: per avere la meglio servono selettori piu specifici dei loro,
+     da qui il prefisso "html body".
+     ───────────────────────────────────────────────────────────────────── */
+  html body #iubenda-cs-banner.iubenda-cs-default-floating {
+    align-items: flex-end !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    background: linear-gradient(to top, rgba(8,8,8,0.74), rgba(8,8,8,0.12)) !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-container {
+    max-width: 680px !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 auto 14px !important;
+    border: 1px solid #3a2a12 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.65) !important;
+    overflow: hidden !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-content {
+    background: #141414 !important;
+    padding: 20px 20px 16px !important;
+  }
+  /* Il testo legale resta integrale: oltre una certa altezza scorre dentro
+     il suo riquadro invece di allungare la scheda. */
+  html body #iubenda-cs-banner .iubenda-banner-content {
+    max-height: 30vh !important;
+    overflow-y: auto !important;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    color: #d8d2cc !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-opt-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-top: 16px !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-opt-group button {
+    flex: 1 1 140px !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    border-radius: 10px !important;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-opt-group button.iubenda-cs-accept-btn,
+  html body #iubenda-cs-banner button.iubenda-cs-accept-btn.iubenda-cs-btn-primary {
+    background: #e8121a !important;
+    border: 1px solid #e8121a !important;
+    color: #ffffff !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-opt-group button.iubenda-cs-reject-btn,
+  html body #iubenda-cs-banner button.iubenda-cs-reject-btn.iubenda-cs-btn-primary {
+    background: #2e2e2e !important;
+    border: 1px solid #6a6a6a !important;
+    color: #ffffff !important;
+  }
+  html body #iubenda-cs-banner .iubenda-cs-opt-group button.iubenda-cs-customize-btn {
+    flex: 1 1 100% !important;
+    background: transparent !important;
+    border: 1px solid #4a4a4a !important;
+    color: #c8c2bc !important;
+  }
+  @media (max-width: 640px) {
+    html body #iubenda-cs-banner .iubenda-cs-content { padding: 16px 16px 14px !important; }
+    html body #iubenda-cs-banner .iubenda-banner-content { max-height: 26vh !important; font-size: 13px !important; }
+  }
+  }
 </style>
 
 <!-- Iubenda — cookie/consent widget -->
